@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+  {% include head.html %}
+
+</head>
+<body class="is-loading">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+  <!-- Header -->
+  <header id="header">
+    <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
+  </header>
+
+
+  <!-- Nav -->
+  <nav id="nav">
+
+    {% include nav.html %}
+
+    <ul class="icons">
+      <li><a href="https://twitter.com/{{site.twitter}}" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+      <li><a href="https://facebook.com/{{site.facebook}}" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+      <li><a href="https://instagram.com/{{site.instagram}}" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+      <li><a href="https://github.com/{{site.github}}" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Main -->
+  <div id="main">
+
+    <article class="post featured">
+      <header class="major">
+        <h2>Our Story</h2>
+        <p>This is our story.</p>
+      </header>
+
+      <div class="timeline-container" id="timeline-1">
+        <div class="timeline">
+          <div class="timeline-item" data-text="THE INTRODUCTION">
+            <div class="timeline__content"><img class="timeline__img" src="/images/pic04.jpg"/>
+              <h2 class="timeline__content-title">2016</h2>
+              <p class="timeline__content-desc">On April 23, 1920, the GrandNational Assembly was inaugurated. Mustafa Kemal Pasha was elected to its Presidency. Fighting on many fronts, he led his forces to victory against rebels and invadingarmies. Following the Turkish triumph at the two major battles at Inonu in Western Turkey,the Grand National Assembly conferred on Mustafa Kemal Pasha the title ofCommander-in-Chief with the rank of Marshal.</p>
+            </div>
+          </div>
+          <div class="timeline-item" data-text="HOW I MET YOUR MOTHER">
+            <div class="timeline__content"><img class="timeline__img" src="/images/pic05.jpg"/>
+              <h2 class="timeline__content-title">2016</h2>
+              <p class="timeline__content-desc">On April 23, 1920, the GrandNational Assembly was inaugurated. Mustafa Kemal Pasha was elected to its Presidency. Fighting on many fronts, he led his forces to victory against rebels and invadingarmies. Following the Turkish triumph at the two major battles at Inonu in Western Turkey,the Grand National Assembly conferred on Mustafa Kemal Pasha the title ofCommander-in-Chief with the rank of Marshal.</p>
+            </div>
+          </div>
+          <div class="timeline-item" data-text="THE PARENT TRAP">
+            <div class="timeline__content"><img class="timeline__img" src="/images/pic03.jpg"/>
+              <h2 class="timeline__content-title">2016</h2>
+              <p class="timeline__content-desc">On April 23, 1920, the GrandNational Assembly was inaugurated. Mustafa Kemal Pasha was elected to its Presidency. Fighting on many fronts, he led his forces to victory against rebels and invadingarmies. Following the Turkish triumph at the two major battles at Inonu in Western Turkey,the Grand National Assembly conferred on Mustafa Kemal Pasha the title ofCommander-in-Chief with the rank of Marshal.</p>
+            </div>
+          </div>
+          <div class="timeline-item" data-text="ENGAGEMENT DAY">
+            <div class="timeline__content"><img class="timeline__img" src="/images/pic01.jpg"/>
+              <h2 class="timeline__content-title">2017</h2>
+              <p class="timeline__content-desc">On April 23, 1920, the GrandNational Assembly was inaugurated. Mustafa Kemal Pasha was elected to its Presidency. Fighting on many fronts, he led his forces to victory against rebels and invadingarmies. Following the Turkish triumph at the two major battles at Inonu in Western Turkey,the Grand National Assembly conferred on Mustafa Kemal Pasha the title ofCommander-in-Chief with the rank of Marshal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+  </div>
+
+  <!-- Footer -->
+  {% include foot.html %}
+
+</div>
+
+<!-- Scripts -->
+{% include scripts-main.html %}
+{% include tracking.html %}
+
+</body>
+</html>

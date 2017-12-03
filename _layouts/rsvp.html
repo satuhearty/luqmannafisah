@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+  {% include head.html %}
+
+</head>
+<body class="is-loading">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+  <!-- Header -->
+  <header id="header">
+    <a href="{{ "/" | absolute_url }}" class="logo">{{site.title}}</a>
+  </header>
+
+
+  <!-- Nav -->
+  <nav id="nav">
+
+    {% include nav.html %}
+
+    <ul class="icons">
+      <li><a href="https://twitter.com/{{site.twitter}}" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+      <li><a href="https://facebook.com/{{site.facebook}}" class="icon fa-facebook" rel="nofollow"><span class="label">Facebook</span></a></li>
+      <li><a href="https://instagram.com/{{site.instagram}}" class="icon fa-instagram" rel="nofollow"><span class="label">Instagram</span></a></li>
+      <li><a href="https://github.com/{{site.github}}" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- Main -->
+  <div id="main">
+
+    <article class="post featured">
+      <header class="major">
+        <h2>RSVP</h2>
+        <p>Let us know if you are coming!</p>
+      </header>
+
+      <form method="post" action="#" class="alt">
+        <div class="row uniform">
+          <div class="12u$">
+            <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+          </div>
+          <div class="6u 12u$(small)">
+            <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+          </div>
+          <div class="6u$ 12u$(small)">
+            <input type="text" name="demo-number" id="demo-number" value="" placeholder="Number" />
+          </div>
+          <!-- Break -->
+          <div class="3u 12u$(small)"></div>
+          <div class="6u$ 12u$(small)">
+            I will be attending:
+          </div>
+          <div class="3u 12u$(small)"></div>
+          <div class="6u$ 12u$(small)" style="text-align: left;">
+            <input type="checkbox" id="nikah" name="nikah">
+            <label for="nikah">Nikah - Saturday, June 14 2018 6.00pm</label>
+          </div>
+          <div class="3u 12u$(small)"></div>
+          <div class="6u$ 12u$(small)" style="text-align: left;">
+            <input type="checkbox" id="reception" name="reception">
+            <label for="reception">Reception - Saturday, June 14 2018 7.30pm</label>
+          </div>
+          <div class="3u 12u$(small)"></div>
+          <div class="6u$ 12u$(small)" style="text-align: left;">
+            <input type="checkbox" id="brunch" name="brunch">
+            <label for="brunch">Brunch - Sunday, June 15th 2018 11.00am</label>
+          </div>
+          <!-- Break -->
+          <div class="12u$">
+            <input type="submit" value="RSVP" class="special" />
+          </div>
+        </div>
+      </form>
+
+    </article>
+
+  </div>
+
+  <!-- Footer -->
+  {% include foot.html %}
+
+</div>
+
+<!-- Scripts -->
+{% include scripts-main.html %}
+{% include tracking.html %}
+
+</body>
+</html>
