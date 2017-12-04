@@ -11,7 +11,10 @@ class Main extends Component {
   }
 
   state = {
-    posts: []
+    posts: [],
+    open: false,
+    author: '',
+    message: ''
   };
 
   componentWillMount() {
@@ -39,6 +42,14 @@ class Main extends Component {
     return newArray;
   };
 
+  updateMessage = (e) => {
+    this.setState({ message: e.target.value });
+  };
+
+  updateAuthor = (e) => {
+    this.setState({ author: e.target.value });
+  };
+
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -47,9 +58,25 @@ class Main extends Component {
     this.setState({ open: false });
   };
 
-  render() {
-    const { open } = this.state;
+  handleSubmit = (e) => {
+    e.preventDefault();
 
+    firebase.database().ref('posts').push({
+      author: this.state.author,
+      message: this.state.message,
+      hasImage: false,
+      upvote: 0
+    });
+
+    this.setState({
+      author: '',
+      message: ''
+    });
+
+    this.onCloseModal();
+  };
+
+  render() {
     return (
       <div>
         <button className="button" onClick={this.onOpenModal}>Post</button>
@@ -59,26 +86,23 @@ class Main extends Component {
             firebase={firebase.database()}
           />
         }
-        <Modal open={open} onClose={this.onCloseModal}>
+        <Modal open={this.state.open} onClose={this.onCloseModal}>
           <h2>Wedding message</h2>
           <p>
             Send your warmest love to the newly weds! Your wedding messages will be shown shortly.
           </p>
           <form method="post" action="#" className="alt">
             <div className="row uniform">
-              <div className="6u 12u$(xsmall)">
-                <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-              </div>
-              <div className="6u$ 12u$(xsmall)">
-                <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+              <div className="12u$">
+                <input type="text" name="demo-name" id="demo-name" placeholder="Name" onChange={this.updateAuthor} />
               </div>
               <div className="12u$">
-                <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" />
+                <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" onChange={this.updateMessage} />
               </div>
               <div className="12u$">
                 <ul className="actions">
-                  <li><input type="submit" value="Send Message" className="special" /></li>
-                  <li><input type="reset" value="Cancel" /></li>
+                  <li><input type="submit" value="Submit" className="special" onClick={this.handleSubmit} /></li>
+                  <li><input type="reset" value="Cancel" onClick={this.onCloseModal} /></li>
                 </ul>
               </div>
             </div>
