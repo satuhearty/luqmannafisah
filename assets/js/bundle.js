@@ -52618,7 +52618,9 @@ class RecipeReviewCard extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Com
 
   render() {
     const { post } = this.props;
+    const domain = 'https://satuhearty.github.io/luqmannafisah';
     const imagesPath = post.hasImage ? `/images/${post.key}.jpeg` : `/images/wedding.jpeg`;
+    const image = domain + imagesPath;
     const likedIcon = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-heart Instagram-heart-icon-liked', 'aria-hidden': 'true', onClick: this.handleUpvote });
     const regularIcon = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-heart-o Instagram-heart-icon', 'aria-hidden': 'true', onClick: this.handleUpvote });
     const icon = this.state.liked ? likedIcon : regularIcon;
@@ -52629,7 +52631,7 @@ class RecipeReviewCard extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Com
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'Instagram-card-image' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: imagesPath })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: image })
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',

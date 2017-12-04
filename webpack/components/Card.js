@@ -81,7 +81,9 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { post } = this.props;
+    const domain = 'https://satuhearty.github.io/luqmannafisah';
     const imagesPath = post.hasImage ? `/images/${post.key}.jpeg` : `/images/wedding.jpeg`;
+    const image = domain + imagesPath;
     const likedIcon = <i className="fa fa-heart Instagram-heart-icon-liked" aria-hidden="true" onClick={this.handleUpvote} />;
     const regularIcon = <i className="fa fa-heart-o Instagram-heart-icon" aria-hidden="true" onClick={this.handleUpvote} />;
     const icon = this.state.liked ? likedIcon : regularIcon;
@@ -89,7 +91,7 @@ class RecipeReviewCard extends React.Component {
     return (
       <div className="Instagram-card">
         <div className="Instagram-card-image">
-          <img src={imagesPath} />
+          <img src={image} />
         </div>
 
         <div className="Instagram-card-content">
