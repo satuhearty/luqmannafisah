@@ -1,33 +1,4 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
-import red from 'material-ui/colors/red';
-import Badge from 'material-ui/Badge';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-
-const styles = theme => ({
-  media: {
-    height: 200
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  flexGrow: {
-    flex: '1 1 auto',
-  },
-});
 
 class RecipeReviewCard extends React.Component {
   state = {
@@ -45,8 +16,7 @@ class RecipeReviewCard extends React.Component {
     firebase.ref('posts/' + post.key).set({
       author: post.author,
       message: post.message,
-      upvote: post.upvote + 1,
-      hasImage: post.hasImage
+      upvote: post.upvote + 1
     });
 
     this.saveLikedInSession();
@@ -81,31 +51,28 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { post } = this.props;
-    const domain = 'https://satuhearty.github.io/luqmannafisah';
-    const imagesPath = post.hasImage ? `/images/${post.key}.jpeg` : `/images/wedding.jpeg`;
-    const image = domain + imagesPath;
     const likedIcon = <i className="fa fa-heart Instagram-heart-icon-liked" aria-hidden="true" onClick={this.handleUpvote} />;
     const regularIcon = <i className="fa fa-heart-o Instagram-heart-icon" aria-hidden="true" onClick={this.handleUpvote} />;
     const icon = this.state.liked ? likedIcon : regularIcon;
-
+    
     return (
       <div className="Instagram-card">
         <div className="Instagram-card-image">
-          <img src={image} />
+          <img src={post.image} />
         </div>
 
         <div className="Instagram-card-content">
-          <p className="Likes">
-            {icon} {post.upvote} likes
-          </p>
           <div>
             <p className="Instagram-card-content-user">{post.author}</p>
             <p className="Instagram-card-content-message">{post.message}</p>
           </div>
+          <p className="Likes">
+            {icon} {post.upvote} likes
+          </p>
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(RecipeReviewCard);
+export default RecipeReviewCard;

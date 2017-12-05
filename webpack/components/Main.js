@@ -3,6 +3,10 @@ import * as firebase from 'firebase';
 import config from './firebase-config';
 import Posts from './Posts';
 import Modal from 'react-responsive-modal';
+import Dropzone from 'react-dropzone'
+import axios from 'axios'
+import { cloudinary } from 'cloudinary-react';
+
 
 class Main extends Component {
   constructor() {
@@ -36,7 +40,7 @@ class Main extends Component {
         'author': obj[key].author,
         'message': obj[key].message,
         'upvote': obj[key].upvote,
-        'hasImage': !!obj[key].hasImage
+        'image': obj[key].image
       });
     });
     return newArray;
@@ -64,7 +68,6 @@ class Main extends Component {
     firebase.database().ref('posts').push({
       author: this.state.author,
       message: this.state.message,
-      hasImage: false,
       upvote: 0
     });
 
@@ -76,9 +79,49 @@ class Main extends Component {
     this.onCloseModal();
   };
 
+  handleDrop = (files) => {
+    const uploaders = files.map(file => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("tags", `satuhearty, wedding, website`);
+      formData.append("upload_preset", "hwscws6c");
+      formData.append("api_key", "317678834666434");
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      return axios.post("https://api.cloudinary.com/v1_1/satuhearty/image/upload", formData, {
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+      }).then(response => {
+        const data = response.data;
+        const fileURL = data.secure_url;
+        console.log(data);
+      })
+    });
+
+    // Once all the files are uploaded
+    axios.all(uploaders).then(() => {
+      console.log('Finished');
+      // ... perform after upload is successful operation
+    });
+  };
+
   render() {
     return (
       <div>
+        <Dropzone
+          onDrop={this.handleDrop}
+          multiple
+          accept="image/*"
+        >
+          <p>Drop your files or click here to upload</p>
+        </Dropzone>
+        {/*<input name="file" type="file"*/}
+               {/*className="file-upload" data-cloudinary-field="image_id"*/}
+               {/*data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"/>*/}
+        {/*<div className="upload">*/}
+          {/*<button onClick={this.uploadWidget} className="upload-button">*/}
+            {/*Add Image*/}
+          {/*</button>*/}
+        {/*</div>*/}
         <button className="button" onClick={this.onOpenModal}>Post</button>
         {this.state.posts &&
           <Posts
