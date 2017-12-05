@@ -16,6 +16,7 @@ class RecipeReviewCard extends React.Component {
     firebase.ref('posts/' + post.key).set({
       author: post.author,
       message: post.message,
+      image: post.image,
       upvote: post.upvote + 1
     });
 
