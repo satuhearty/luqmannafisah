@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import config from './firebase-config';
 import Posts from './Posts';
 import Modal from 'react-responsive-modal';
-import Dropzone from 'react-dropzone'
+import DropzoneComponent from 'react-dropzone-component'
 import axios from 'axios'
 import { cloudinary } from 'cloudinary-react';
 
@@ -96,24 +96,33 @@ class Main extends Component {
         console.log(data);
       })
     });
-
-    // Once all the files are uploaded
-    axios.all(uploaders).then(() => {
-      console.log('Finished');
-      // ... perform after upload is successful operation
-    });
   };
 
   render() {
+    const componentConfig = {
+      iconFiletypes: ['.jpg', '.png', '.gif'],
+      showFiletypeIcon: true,
+      postUrl: 'no-url'
+    };
+    const djsConfig = {
+      addRemoveLinks: true,
+      acceptedFiles: "image/jpeg,image/png,image/gif",
+      autoProcessQueue: false
+    };
+    const eventHandlers = {
+      init: (dz) => this.dropzone = dz,
+      addedfile: (file) => {
+        console.log(file);
+      }
+    };
+
     return (
       <div>
-        <Dropzone
-          onDrop={this.handleDrop}
-          multiple
-          accept="image/*"
-        >
-          <p>Drop your files or click here to upload</p>
-        </Dropzone>
+        <DropzoneComponent
+          config={componentConfig}
+          eventHandlers={eventHandlers}
+          djsConifg={djsConfig}
+        />
         {/*<input name="file" type="file"*/}
                {/*className="file-upload" data-cloudinary-field="image_id"*/}
                {/*data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"/>*/}

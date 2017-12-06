@@ -63,13 +63,13 @@ class RecipeReviewCard extends React.Component {
         </div>
 
         <div className="Instagram-card-content">
+          <p className="Likes">
+            {icon} {post.upvote} likes
+          </p>
           <div>
             <p className="Instagram-card-content-user">{post.author}</p>
             <p className="Instagram-card-content-message">{post.message}</p>
           </div>
-          <p className="Likes">
-            {icon} {post.upvote} likes
-          </p>
         </div>
       </div>
     );
