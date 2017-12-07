@@ -427,7 +427,7 @@ hr{
 }
 .dropzone {
 
-  $image-size: 120px;
+  $image-size: 200px;
 
   $image-border-radius: 20px;
 
@@ -444,6 +444,7 @@ hr{
     }
   }
 
+  text-align: center;
   min-height: 150px;
   border: 2px solid rgba(0, 0, 0, 0.3);
   background: white;
@@ -591,13 +592,13 @@ hr{
       border-radius: $image-border-radius;
       overflow: hidden;
       width: $image-size;
-      height: $image-size;
       position: relative;
       display: block;
       z-index: 10;
 
       img {
         display: block;
+        width: $image-size;
       }
     }
 

@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import config from './firebase-config';
 import Posts from './Posts';
 import Modal from 'react-responsive-modal';
-import DropzoneComponent from 'react-dropzone-component'
+import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import { cloudinary } from 'cloudinary-react';
 
@@ -18,7 +18,8 @@ class Main extends Component {
     posts: [],
     open: false,
     author: '',
-    message: ''
+    message: '',
+    files: []
   };
 
   componentWillMount() {
@@ -98,39 +99,27 @@ class Main extends Component {
     });
   };
 
+  getInitialState = () => {
+    return {
+      files: []
+    };
+  };
+
+  onDrop = (files) => {
+    console.log(files);
+    this.setState({
+      files: files
+    });
+  };
+
   render() {
-    const componentConfig = {
-      iconFiletypes: ['.jpg', '.png', '.gif'],
-      showFiletypeIcon: true,
-      postUrl: 'no-url'
-    };
-    const djsConfig = {
-      addRemoveLinks: true,
-      acceptedFiles: "image/jpeg,image/png,image/gif",
-      autoProcessQueue: false
-    };
-    const eventHandlers = {
-      init: (dz) => this.dropzone = dz,
-      addedfile: (file) => {
-        console.log(file);
-      }
+    const styles = {
+      width: 'auto',
+      height: 'auto'
     };
 
     return (
       <div>
-        <DropzoneComponent
-          config={componentConfig}
-          eventHandlers={eventHandlers}
-          djsConifg={djsConfig}
-        />
-        {/*<input name="file" type="file"*/}
-               {/*className="file-upload" data-cloudinary-field="image_id"*/}
-               {/*data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}"/>*/}
-        {/*<div className="upload">*/}
-          {/*<button onClick={this.uploadWidget} className="upload-button">*/}
-            {/*Add Image*/}
-          {/*</button>*/}
-        {/*</div>*/}
         <button className="button" onClick={this.onOpenModal}>Post</button>
         {this.state.posts &&
           <Posts
@@ -150,6 +139,43 @@ class Main extends Component {
               </div>
               <div className="12u$">
                 <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" onChange={this.updateMessage} />
+              </div>
+              <div className="12u$">
+                <div className="dropzone">
+                  <Dropzone
+                    ref="dropzone"
+                    onDrop={this.onDrop}
+                    style={styles}
+                  >
+                    {this.state.files.length <= 0 &&
+                    <div className="dz-default dz-message">
+                      <span>Drop files here to upload</span>
+                    </div>
+                    }
+                    {this.state.files.length > 0 &&
+                    <div>
+                      {this.state.files.map((file) => (
+                        <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
+                          <div className="dz-image">
+                            <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />
+                          </div>
+                          {/*<div className="dz-details">*/}
+                          {/*<div className="dz-size">*/}
+                          {/*<span data-dz-size=""><strong>1.3</strong> MB</span>*/}
+                          {/*</div>*/}
+                          {/*<div className="dz-filename">*/}
+                          {/*<span data-dz-name="">boston.jpg</span>*/}
+                          {/*</div>*/}
+                          {/*</div>*/}
+                          <div className="dz-progress">
+                            <span className="dz-upload" data-dz-uploadprogress="" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    }
+                  </Dropzone>
+                </div>
               </div>
               <div className="12u$">
                 <ul className="actions">
