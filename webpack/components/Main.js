@@ -25,6 +25,8 @@ class Main extends Component {
   componentWillMount() {
     let postsRef = firebase.database().ref('posts');
 
+    window.firebase = firebase.database().ref('posts');
+
     postsRef.on('value', snapshot => {
       this.setState({
         posts: this.reverseObject(snapshot.val()),
@@ -66,22 +68,7 @@ class Main extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    firebase.database().ref('posts').push({
-      author: this.state.author,
-      message: this.state.message,
-      upvote: 0
-    });
-
-    this.setState({
-      author: '',
-      message: ''
-    });
-
-    this.onCloseModal();
-  };
-
-  handleDrop = (files) => {
-    const uploaders = files.map(file => {
+    this.state.files.map(file => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", `satuhearty, wedding, website`);
@@ -92,24 +79,34 @@ class Main extends Component {
       return axios.post("https://api.cloudinary.com/v1_1/satuhearty/image/upload", formData, {
         headers: { "X-Requested-With": "XMLHttpRequest" },
       }).then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url;
-        console.log(data);
+        const fileUrl = response.data.secure_url;
+
+        firebase.database().ref('posts').push({
+          author: this.state.author,
+          message: this.state.message,
+          upvote: 0,
+          image: fileUrl
+        });
+
+        this.setState({
+          author: '',
+          message: '',
+          files: []
+        });
+
+        this.onCloseModal();
       })
     });
   };
 
-  getInitialState = () => {
-    return {
-      files: []
-    };
+  onDrop = (files) => {
+    this.setState({ files: files });
   };
 
-  onDrop = (files) => {
-    console.log(files);
-    this.setState({
-      files: files
-    });
+  removeFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ files: [] });
   };
 
   render() {
@@ -148,31 +145,26 @@ class Main extends Component {
                     style={styles}
                   >
                     {this.state.files.length <= 0 &&
-                    <div className="dz-default dz-message">
-                      <span>Drop files here to upload</span>
-                    </div>
+                      <div className="dz-default dz-message">
+                        <span>Drop files here to upload</span>
+                      </div>
                     }
                     {this.state.files.length > 0 &&
-                    <div>
-                      {this.state.files.map((file) => (
-                        <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
-                          <div className="dz-image">
-                            <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />
+                      <div>
+                        {this.state.files.map((file) => (
+                          <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
+                            <div className="dz-image">
+                              <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />
+                            </div>
+                            <div className="dz-progress">
+                              <span className="dz-upload" data-dz-uploadprogress="" />
+                            </div>
+                            <a href="javascript:undefined;" className="icon alt fa-2x fa-times-circle-o" onClick={this.removeFile}>
+                              <span className="label">Remove</span>
+                            </a>
                           </div>
-                          {/*<div className="dz-details">*/}
-                          {/*<div className="dz-size">*/}
-                          {/*<span data-dz-size=""><strong>1.3</strong> MB</span>*/}
-                          {/*</div>*/}
-                          {/*<div className="dz-filename">*/}
-                          {/*<span data-dz-name="">boston.jpg</span>*/}
-                          {/*</div>*/}
-                          {/*</div>*/}
-                          <div className="dz-progress">
-                            <span className="dz-upload" data-dz-uploadprogress="" />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
                     }
                   </Dropzone>
                 </div>
