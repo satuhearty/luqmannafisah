@@ -5,8 +5,6 @@ import Posts from './Posts';
 import Modal from 'react-responsive-modal';
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
-import { cloudinary } from 'cloudinary-react';
-
 
 class Main extends Component {
   constructor() {
@@ -15,39 +13,18 @@ class Main extends Component {
   }
 
   state = {
-    posts: [],
     open: false,
     author: '',
     message: '',
-    files: []
+    files: [],
+    count: 0
   };
 
-  componentWillMount() {
-    let postsRef = firebase.database().ref('posts');
-
-    window.firebase = firebase.database().ref('posts');
-
-    postsRef.on('value', snapshot => {
-      this.setState({
-        posts: this.reverseObject(snapshot.val()),
-        loading: false
-      });
+  componentDidMount() {
+    firebase.database().ref('count').on('value', snapshot => {
+      this.setState({ count: snapshot.val() });
     });
   }
-
-  reverseObject = (obj) => {
-    let newArray = [];
-    Object.keys(obj).sort().reverse().forEach(key => {
-      newArray.push( {
-        'key': key,
-        'author': obj[key].author,
-        'message': obj[key].message,
-        'upvote': obj[key].upvote,
-        'image': obj[key].image
-      });
-    });
-    return newArray;
-  };
 
   updateMessage = (e) => {
     this.setState({ message: e.target.value });
@@ -68,35 +45,53 @@ class Main extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.state.files.map(file => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("tags", `satuhearty, wedding, website`);
-      formData.append("upload_preset", "hwscws6c");
-      formData.append("api_key", "317678834666434");
-      formData.append("timestamp", (Date.now() / 1000) | 0);
+    if (this.state.author === '' || this.state.message === '') {
+      return;
+    }
 
-      return axios.post("https://api.cloudinary.com/v1_1/satuhearty/image/upload", formData, {
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-      }).then(response => {
-        const fileUrl = response.data.secure_url;
+    const files = this.state.files;
 
-        firebase.database().ref('posts').push({
-          author: this.state.author,
-          message: this.state.message,
-          upvote: 0,
-          image: fileUrl
+    if (files.length === 0) {
+      this.addPost('');
+    } else {
+      this.state.files.map(file => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("tags", `satuhearty, wedding, website`);
+        formData.append("upload_preset", "hwscws6c");
+        formData.append("api_key", "317678834666434");
+        formData.append("timestamp", (Date.now() / 1000) | 0);
+
+        return axios.post("https://api.cloudinary.com/v1_1/satuhearty/image/upload", formData, {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        }).then(response => {
+          const fileUrl = response.data.secure_url;
+          this.addPost(fileUrl);
         });
+      });
+    }
+  };
 
-        this.setState({
-          author: '',
-          message: '',
-          files: []
-        });
+  addPost = (imageUrl) => {
+    const newCount = this.state.count + 1;
 
-        this.onCloseModal();
-      })
+    firebase.database().ref('posts/' + newCount).set({
+      author: this.state.author,
+      message: this.state.message,
+      upvote: 0,
+      image: imageUrl
     });
+
+    firebase.database().ref('count').set(newCount);
+
+    this.setState({
+      author: '',
+      message: '',
+      files: [],
+      count: newCount
+    });
+
+    this.onCloseModal();
   };
 
   onDrop = (files) => {
@@ -110,17 +105,12 @@ class Main extends Component {
   };
 
   render() {
-    const styles = {
-      width: 'auto',
-      height: 'auto'
-    };
-
     return (
       <div>
-        <button className="button" onClick={this.onOpenModal}>Post</button>
-        {this.state.posts &&
+        <button className="button post" onClick={this.onOpenModal}>Post</button>
+        {this.state.count > 0 &&
           <Posts
-            posts={this.state.posts}
+            count={this.state.count}
             firebase={firebase.database()}
           />
         }
@@ -142,7 +132,7 @@ class Main extends Component {
                   <Dropzone
                     ref="dropzone"
                     onDrop={this.onDrop}
-                    style={styles}
+                    style={{ width: 'auto', height: 'auto' }}
                   >
                     {this.state.files.length <= 0 &&
                       <div className="dz-default dz-message">
@@ -151,7 +141,7 @@ class Main extends Component {
                     }
                     {this.state.files.length > 0 &&
                       <div>
-                        {this.state.files.map((file) => (
+                        {this.state.files.map(file => (
                           <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
                             <div className="dz-image">
                               <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Card from './Card';
-import Masonry from 'react-masonry-component';
-import MasonryInfiniteScroller from 'react-masonry-infinite';
 import MasonryLayout from './MasonryLayout';
+
+const POST_BATCH_LIMIT = 2;
 
 class Posts extends Component {
   state = {
@@ -10,55 +10,62 @@ class Posts extends Component {
     hasMore: true,
     overlap: false,
     loading: false,
-    count: 6,
-    perPage: 10,
-    items: Array(20).fill()
+    imageLoaded: false,
+    count: 0,
+    initialCount: 0
   };
 
-  loadItems = () => {
+  componentWillMount() {
     this.setState({
-      items: this.state.items.concat(Array(this.state.perPage).fill())
+      count: this.props.count,
+      initialCount: this.props.count
     });
+  }
+
+  imageLoaded = () => {
+    this.setState({ imageLoaded: !this.state.imageLoaded });
   };
 
   getCards = () => {
-    if (this.state.loading) {
+    if (this.state.loading || this.state.initialCount === 0) {
       return;
     }
 
     this.setState({ loading: true });
-    console.log('Current count is :' + this.state.count);
-
-    if (this.state.count <= 0 && this.state.overlap) {
-      // this.setState({ hasMore: false, loading: false });
-      // return;
-    }
 
     if (this.state.count <= 0) {
-      this.setState({ count: 6, overlap: true });
+      this.setState({ hasMore: false, loading: false });
+      return;
     }
 
-    this.props.firebase.ref('posts').orderByKey().limitToLast(2).endAt(this.state.count.toString()).on('value', snapshot => {
-      let posts = [];
-      if (snapshot.numChildren() > 0) {
-        snapshot.forEach(post => {
-          posts.push({
-            key: post.child('index').val(),
-            author: post.child('author').val(),
-            message: post.child('message').val(),
-            upvote: post.child('upvote').val(),
-            image: post.child('image').val()
-          });
-        });
+    this.props.firebase.ref('posts')
+      .orderByKey()
+      .limitToLast(POST_BATCH_LIMIT)
+      .endAt(this.state.count.toString()).on('value', snapshot => {
+        if (this.state.count <= 0) {
+          return;
+        }
 
-        this.setState({
-          elements: this.state.elements.concat(posts),
-          count: this.state.count - 2,
-          loading: false
-        });
-      } else {
-        this.setState({ hasMore: false, loading: false });
-      }
+        let posts = [];
+        if (snapshot.numChildren() > 0) {
+          snapshot.forEach(post => {
+            posts.unshift({
+              key: post.key,
+              author: post.val().author,
+              message: post.val().message,
+              upvote: post.val().upvote,
+              image: post.val().image
+            });
+          });
+
+          this.setState({
+            elements: this.state.elements.concat(posts),
+            count: this.state.count - POST_BATCH_LIMIT,
+            loading: false
+          });
+        } else {
+          this.setState({ hasMore: false, loading: false });
+        }
     });
   };
 
@@ -79,28 +86,11 @@ class Posts extends Component {
               <Card
                 post={post}
                 firebase={this.props.firebase}
+                onImageLoaded={this.imageLoaded}
               />
             </div>
           );
         })}
-        {/*{this.state.items.map((v, i) => {*/}
-          {/*let height = i % 2 === 0 ? 200 : 100;*/}
-          {/*return (*/}
-            {/*<div*/}
-              {/*key={i}*/}
-              {/*style={{*/}
-                {/*width: '100px',*/}
-                {/*height: `${height}px`,*/}
-                {/*lineHeight: `${height}px`,*/}
-                {/*color: 'white',*/}
-                {/*fontSize: '32px',*/}
-                {/*display: 'block',*/}
-                {/*background: 'rgba(0,0,0,0.7)'*/}
-              {/*}}>*/}
-              {/*{i}*/}
-            {/*</div>*/}
-          {/*)}*/}
-        {/*)}*/}
       </MasonryLayout>
     );
   }

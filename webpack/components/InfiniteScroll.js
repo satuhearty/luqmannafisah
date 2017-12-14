@@ -14,7 +14,7 @@ export default (ComposedComponent) => class I extends Component {
     infiniteScrollDisabled: PropTypes.bool,
     infiniteScrollSpinner: PropTypes.element,
     infiniteScrollEndIndicator: PropTypes.element
-  }
+  };
 
   static defaultProps = {
     infiniteScroll: () => {},
@@ -26,20 +26,17 @@ export default (ComposedComponent) => class I extends Component {
     infiniteScrollDisabled: false,
     infiniteScrollSpinner: <div>this is a loader</div>,
     infiniteScrollEndIndicator: <div>no more data</div>
-  }
+  };
 
   constructor(props) {
-    super(props)
-    this.handleScroll = this.handleScroll.bind(this)
+    super(props);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
     if (!this.props.infiniteScrollDisabled) {
-
       this.handleScroll();
-
-      const { infiniteScrollContainer } = this.props
-
+      const { infiniteScrollContainer } = this.props;
       if (infiniteScrollContainer === 'window') {
         window.addEventListener('scroll', this.handleScroll)
       } else {
@@ -47,15 +44,12 @@ export default (ComposedComponent) => class I extends Component {
           .getElementById(infiniteScrollContainer)
           .addEventListener('mousewheel', this.handleScroll)
       }
-
     }
   }
 
   componentWillUnmount() {
     if (!this.props.infiniteScrollDisabled) {
-
       const { infiniteScrollContainer } = this.props
-
       if (infiniteScrollContainer === 'window') {
         window.removeEventListener('scroll', this.handleScroll)
       } else {
@@ -63,7 +57,6 @@ export default (ComposedComponent) => class I extends Component {
           .getElementById(infiniteScrollContainer)
           .removeEventListener('mousewheel', this.handleScroll)
       }
-
     }
   }
 
@@ -93,5 +86,4 @@ export default (ComposedComponent) => class I extends Component {
       </div>
     )
   }
-
 }

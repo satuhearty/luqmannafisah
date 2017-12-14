@@ -285,6 +285,7 @@
 
 .Instagram-card-content-message {
   margin: 0;
+  text-align: left;
 }
 
 .Instagram-heart-icon-liked {
@@ -830,6 +831,12 @@ hr{
 @media screen and (max-width: 375px) {
   .card {
     width: 315px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    width: 265px;
   }
 }
 

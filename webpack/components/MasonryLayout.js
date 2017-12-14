@@ -11,7 +11,7 @@ class MasonryLayout extends Component {
     style: PropTypes.object,
     className: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.element).isRequired
-  }
+  };
 
   static defaultProps = {
     style: {},
@@ -22,7 +22,7 @@ class MasonryLayout extends Component {
       { mq: '550px', columns: 2, gutter: 20 },
       { mq: '900px', columns: 3, gutter: 20 }
     ]
-  }
+  };
 
   componentDidMount() {
     const instance = Bricks({
@@ -31,32 +31,30 @@ class MasonryLayout extends Component {
       sizes: this.props.sizes
     });
 
-    instance.resize(true)
+    instance.resize(true);
 
     if (this.props.children.length > 0) {
-      instance.pack()
+      instance.pack();
     }
 
     this.bricksInstance = instance;
-
     window.addEventListener('resize', this.updateDimensions);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.children.length === 0 && this.props.children.length === 0) {
-      console.log('returning here');
-      return;
-    }
-
-    if (prevProps.children.length === 0 && this.props.children.length > 0) {
-      console.log('packing here');
-      return this.bricksInstance.pack()
-    }
-
-    if (prevProps.children.length !== this.props.children.length) {
-      console.log('update');
-      return this.bricksInstance.pack();
-    }
+    console.log('Packing in Masonry');
+    this.bricksInstance.pack();
+    // if (prevProps.children.length === 0 && this.props.children.length === 0) {
+    //   return;
+    // }
+    //
+    // if (prevProps.children.length === 0 && this.props.children.length > 0) {
+    //   return this.bricksInstance.pack();
+    // }
+    //
+    // if (prevProps.children.length !== this.props.children.length) {
+    //   return this.bricksInstance.pack();
+    // }
   }
 
   componentWillUnmount() {
