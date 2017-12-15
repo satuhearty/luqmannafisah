@@ -21,6 +21,7 @@ class Main extends Component {
   };
 
   componentDidMount() {
+    window.firebase = firebase.database();
     firebase.database().ref('count').on('value', snapshot => {
       this.setState({ count: snapshot.val() });
     });

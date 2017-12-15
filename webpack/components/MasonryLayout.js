@@ -41,8 +41,7 @@ class MasonryLayout extends Component {
     window.addEventListener('resize', this.updateDimensions);
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('Packing in Masonry');
+  componentDidUpdate() {
     this.bricksInstance.pack();
     // if (prevProps.children.length === 0 && this.props.children.length === 0) {
     //   return;

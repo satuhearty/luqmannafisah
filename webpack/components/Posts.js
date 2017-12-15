@@ -7,6 +7,7 @@ const POST_BATCH_LIMIT = 2;
 class Posts extends Component {
   state = {
     elements: [],
+    loadedPostIds: [],
     hasMore: true,
     overlap: false,
     loading: false,
@@ -20,6 +21,26 @@ class Posts extends Component {
       count: this.props.count,
       initialCount: this.props.count
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.count !== this.props.count) {
+      this.props.firebase.ref('posts').orderByKey().equalTo(this.props.count.toString()).once('value', snapshot => {
+        const post = snapshot.val()[this.props.count];
+        this.state.elements.unshift({
+          key: this.props.count,
+          author: post.author,
+          message: post.message,
+          upvote: post.upvote,
+          image: post.image
+        });
+        this.state.loadedPostIds.push(this.props.count);
+        this.setState({
+          elements: this.state.elements,
+          loadedPostIds: this.state.loadedPostIds
+        });
+      });
+    }
   }
 
   imageLoaded = () => {
@@ -42,13 +63,18 @@ class Posts extends Component {
       .orderByKey()
       .limitToLast(POST_BATCH_LIMIT)
       .endAt(this.state.count.toString()).on('value', snapshot => {
-        if (this.state.count <= 0) {
-          return;
-        }
-
         let posts = [];
+        let loadedPostIds = [];
         if (snapshot.numChildren() > 0) {
+          let postAlreadyLoaded = false;
           snapshot.forEach(post => {
+            if (this.state.loadedPostIds.indexOf(post.key) !== -1) {
+              postAlreadyLoaded = true;
+              return;
+            }
+
+            loadedPostIds.push(post.key);
+
             posts.unshift({
               key: post.key,
               author: post.val().author,
@@ -58,11 +84,14 @@ class Posts extends Component {
             });
           });
 
-          this.setState({
-            elements: this.state.elements.concat(posts),
-            count: this.state.count - POST_BATCH_LIMIT,
-            loading: false
-          });
+          if (!postAlreadyLoaded) {
+            this.setState({
+              elements: this.state.elements.concat(posts),
+              loadedPostIds: this.state.loadedPostIds.concat(loadedPostIds),
+              count: this.state.count - POST_BATCH_LIMIT,
+              loading: false
+            });
+          }
         } else {
           this.setState({ hasMore: false, loading: false });
         }
