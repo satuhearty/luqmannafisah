@@ -1,10 +1,14 @@
 module.exports = {
   // webpack folder's entry js - excluded from jekll's build process.
-  entry: "./webpack/entry.js",
+  entry: {
+    'guestbook': './webpack/guestbook.js',
+    'guestlist': './webpack/guestlist.js',
+    'rsvp': './webpack/rsvp.js'
+  },
   output: {
     // we're going to put the generated file in the assets folder so jekyll will grab it.
       path: __dirname + '/assets/js/',
-      filename: "bundle.js"
+      filename: '[name].js'
   },
   module: {
     loaders: [
@@ -18,8 +22,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?modules',
-        include: /flexboxgrid/
+        loader: 'style-loader!css-loader?modules'
       }
     ]
   }

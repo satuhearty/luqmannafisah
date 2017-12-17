@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Card from './Card';
 import MasonryLayout from './MasonryLayout';
 
-const POST_BATCH_LIMIT = 2;
+const POST_BATCH_LIMIT = 4;
 
 class Posts extends Component {
   state = {

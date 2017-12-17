@@ -58,6 +58,7 @@
     "react-interactive": "^0.8.1",
     "react-responsive-modal": "^2.0.0",
     "react-router-dom": "^4.2.2",
+    "react-table": "^6.7.5",
     "style-loader": "^0.19.0",
     "typeface-roboto": "0.0.45",
     "url-loader": "^0.6.2"
