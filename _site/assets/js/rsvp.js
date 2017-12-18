@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 330);
+/******/ 	return __webpack_require__(__webpack_require__.s = 325);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -52424,12 +52424,7 @@ exports.default = {
 /* 322 */,
 /* 323 */,
 /* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */
+/* 325 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52534,7 +52529,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       this.setState({ open: false });
     };
 
-    __WEBPACK_IMPORTED_MODULE_2_firebase__["initializeApp"](__WEBPACK_IMPORTED_MODULE_3__components_firebase_config__["a" /* default */]);;
+    __WEBPACK_IMPORTED_MODULE_2_firebase__["initializeApp"](__WEBPACK_IMPORTED_MODULE_3__components_firebase_config__["a" /* default */]);
   }
 
   render() {

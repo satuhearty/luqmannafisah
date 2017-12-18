@@ -10,7 +10,7 @@ const RSVP_CODE = 'luqman';
 class App extends Component {
   constructor() {
     super();
-    firebase.initializeApp(config);;
+    firebase.initializeApp(config);
   }
 
   state = {
