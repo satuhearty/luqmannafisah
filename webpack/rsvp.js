@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import * as firebase from 'firebase';
 import config from './components/firebase-config';
 import Modal from 'react-responsive-modal';
+import Notifications, {notify} from 'react-notify-toast';
 
 const MODAL_TIMEOUT = 3000;
 const RSVP_CODE = 'luqman';
@@ -48,8 +49,15 @@ class App extends Component {
     e.preventDefault();
     e.stopPropagation();
     if (this.state.code === RSVP_CODE) {
+      this.createNotification('Success!', 'success');
       this.setState({ showForm: true });
+    } else {
+      this.createNotification('Incorrect RSVP Code.', 'error');
     }
+  };
+
+  createNotification = (message, type) => {
+    notify.show(message, type, MODAL_TIMEOUT);
   };
 
   updateCode = (e) => {
@@ -95,11 +103,12 @@ class App extends Component {
   render() {
     return (
       <article className="post featured">
+        <Notifications />
         {!this.state.showForm &&
           <div>
             <header className="major">
               <h2>RSVP</h2>
-              <p>Please enter your RSVP code to send your RSVP.</p>
+              <p>Please enter your RSVP code.</p>
             </header>
             <form className="alt" method="post" action="#">
               <div className="row uniform">
@@ -165,13 +174,13 @@ class App extends Component {
                 <p style={{textAlign: 'center', margin: 0}}>You have just RSVP for </p>
                 <ul style={{listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold'}}>
                   {this.state.nikah &&
-                  <li>Nikah</li>
+                    <li>Nikah</li>
                   }
                   {this.state.reception &&
-                  <li>Reception</li>
+                    <li>Reception</li>
                   }
                   {this.state.brunch &&
-                  <li>Brunch</li>
+                    <li>Brunch</li>
                   }
                 </ul>
                 <p style={{textAlign: 'center', margin: 0}}>for {this.state.attending} people.</p>

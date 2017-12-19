@@ -2,9 +2,9 @@ import React from 'react';
 
 class RecipeReviewCard extends React.Component {
   componentWillMount() {
-    // if (this.postAlreadyLiked()) {
-    //   this.setState({ liked: true });
-    // }
+    if (this.postAlreadyLiked()) {
+      this.setState({ liked: true });
+    }
     this.setState({ likeCount: this.props.post.upvote });
   }
 
@@ -29,7 +29,7 @@ class RecipeReviewCard extends React.Component {
       upvote: post.upvote + 1
     });
 
-    // this.saveLikedInSession();
+    this.saveLikedInSession();
     this.setState({
       liked: true,
       likeCount: this.state.likeCount + 1
@@ -37,18 +37,18 @@ class RecipeReviewCard extends React.Component {
   };
 
   saveLikedInSession = () => {
-    let liked = window.sessionStorage.getItem('liked');
+    let liked = window.localStorage.getItem('liked');
     if (!liked) {
       liked = {};
     } else {
       liked = JSON.parse(liked);
     }
     liked[this.props.post.key] = true;
-    window.sessionStorage.setItem('liked', JSON.stringify(liked));
+    window.localStorage.setItem('liked', JSON.stringify(liked));
   };
 
   postAlreadyLiked = () => {
-    let liked = window.sessionStorage.getItem('liked');
+    let liked = window.localStorage.getItem('liked');
     if (!liked) {
       return false;
     }

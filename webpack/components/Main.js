@@ -3,8 +3,9 @@ import * as firebase from 'firebase';
 import config from './firebase-config';
 import Posts from './Posts';
 import Modal from 'react-responsive-modal';
-import Dropzone from 'react-dropzone'
-import axios from 'axios'
+import ScrollToTop from 'react-scroll-up';
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
 
 class Main extends Component {
   constructor() {
@@ -76,7 +77,7 @@ class Main extends Component {
   addPost = (imageUrl) => {
     const newCount = this.state.count + 1;
 
-    firebase.database().ref('posts/' + newCount).set({
+    firebase.database().ref('posts').push({
       author: this.state.author,
       message: this.state.message,
       upvote: 0,
@@ -109,6 +110,9 @@ class Main extends Component {
     return (
       <div>
         <button className="button post" onClick={this.onOpenModal}>Post</button>
+        <ScrollToTop showUnder={50}>
+          <span><i className="fa fa-chevron-up" aria-hidden="true" style={{fontSize: '1.5em', color: '#ff7c64'}} /></span>
+        </ScrollToTop>
         {this.state.count > 0 &&
           <Posts
             count={this.state.count}
