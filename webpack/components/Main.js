@@ -110,8 +110,20 @@ class Main extends Component {
     return (
       <div>
         <button className="button post" onClick={this.onOpenModal}>Post</button>
-        <ScrollToTop showUnder={50}>
-          <span><i className="fa fa-chevron-up" aria-hidden="true" style={{fontSize: '1.5em', color: '#ff7c64'}} /></span>
+        <ScrollToTop
+          showUnder={50}
+          style={{
+            zIndex: '9999',
+            position: 'fixed',
+            bottom: 50,
+            right: 30,
+            cursor: 'pointer',
+            transitionDuration: '0.2s',
+            transitionTimingFunction: 'linear',
+            transitionDelay: '0s'
+          }}
+        >
+          <span><i className="fa fa-chevron-up" aria-hidden="true" style={{ fontSize: '1.5em', color: '#f54241', border: '4px solid #f54241', borderRadius: '50%', padding: '10px' }} /></span>
         </ScrollToTop>
         {this.state.count > 0 &&
           <Posts

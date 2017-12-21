@@ -86,8 +86,104 @@ class App extends Component {
 
   render() {
     const { data, currentData } = this.state;
+
+    let nikahCount = 0;
+    let receptionCount = 0;
+    let brunchCount = 0;
+
+    data.forEach(guest => {
+      if (guest.nikah) {
+        nikahCount += parseInt(guest.attending);
+      }
+      if (guest.reception) {
+        receptionCount += parseInt(guest.attending);
+      }
+      if (guest.brunch) {
+        brunchCount += parseInt(guest.attending);
+      }
+    });
+
+    const columns = [
+      {
+        Header: 'Name',
+        columns: [
+          {
+            Header: 'First Name',
+            accessor: 'name'
+          }
+        ]
+      },
+      {
+        Header: 'Info',
+        columns: [
+          {
+            Header: 'Email',
+            accessor: 'email'
+          },
+          {
+            Header: 'Phone',
+            accessor: 'phone'
+          }
+        ]
+      },
+      {
+        Header: 'RSVP',
+        columns: [
+          {
+            Header: 'Nikah',
+            accessor: 'nikah',
+            minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
+            Cell: props => this.getRsvpDisplay(props),
+            Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
+            filterMethod: (filter, row) => this.filterRsvp(filter, row)
+          },
+          {
+            Header: 'Reception',
+            accessor: 'reception',
+            minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
+            Cell: props => this.getRsvpDisplay(props),
+            Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
+            filterMethod: (filter, row) => this.filterRsvp(filter, row)
+          },
+          {
+            Header: 'Brunch',
+            accessor: 'brunch',
+            minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
+            Cell: props => this.getRsvpDisplay(props),
+            Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
+            filterMethod: (filter, row) => this.filterRsvp(filter, row)
+          },
+          {
+            Header: 'Attending',
+            accessor: 'attending',
+            minWidth: MIN_WIDTH_FOR_RSVP_DETAILS
+          }
+        ]
+      }
+    ];
+
     return (
       <div>
+        <div className="row uniform" style={{ paddingBottom: '3em' }}>
+          <div className="4u 12u$(small)" style={{ textAlign: 'center' }}>
+            <div className="box">
+              Nikah Count:<br />
+              <h2>{nikahCount}</h2>
+            </div>
+          </div>
+          <div className="4u 12u$(small)" style={{ textAlign: 'center' }}>
+            <div className="box">
+              Reception Count:<br />
+              <h2>{receptionCount}</h2>
+            </div>
+          </div>
+          <div className="4u$ 12u$(small)" style={{ textAlign: 'center' }}>
+            <div className="box">
+              Brunch Count:<br />
+              <h2>{brunchCount}</h2>
+            </div>
+          </div>
+        </div>
         <ReactTable
           data={data}
           filterable
@@ -95,7 +191,7 @@ class App extends Component {
           getTdProps={(state, rowInfo) => {
             return {
               onClick: (e, handleOriginal) => {
-                this.setState({ currentData: rowInfo.original })
+                this.setState({ currentData: rowInfo.original });
                 this.onOpenModal();
                 if (handleOriginal) {
                   handleOriginal()
@@ -103,65 +199,8 @@ class App extends Component {
               }
             }
           }}
-          columns={[
-            {
-              Header: 'Name',
-              columns: [
-                {
-                  Header: 'First Name',
-                  accessor: 'name'
-                }
-              ]
-            },
-            {
-              Header: 'Info',
-              columns: [
-                {
-                  Header: 'Email',
-                  accessor: 'email'
-                },
-                {
-                  Header: 'Phone',
-                  accessor: 'phone'
-                }
-              ]
-            },
-            {
-              Header: 'RSVP',
-              columns: [
-                {
-                  Header: 'Nikah',
-                  accessor: 'nikah',
-                  minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
-                  Cell: props => this.getRsvpDisplay(props),
-                  Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
-                  filterMethod: (filter, row) => this.filterRsvp(filter, row)
-                },
-                {
-                  Header: 'Reception',
-                  accessor: 'reception',
-                  minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
-                  Cell: props => this.getRsvpDisplay(props),
-                  Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
-                  filterMethod: (filter, row) => this.filterRsvp(filter, row)
-                },
-                {
-                  Header: 'Brunch',
-                  accessor: 'brunch',
-                  minWidth: MIN_WIDTH_FOR_RSVP_DETAILS,
-                  Cell: props => this.getRsvpDisplay(props),
-                  Filter: ({ filter, onChange }) => this.getRsvpFilters(filter, onChange),
-                  filterMethod: (filter, row) => this.filterRsvp(filter, row)
-                },
-                {
-                  Header: 'Attending',
-                  accessor: 'attending',
-                  minWidth: MIN_WIDTH_FOR_RSVP_DETAILS
-                }
-              ]
-            }
-          ]}
-          defaultPageSize={10}
+          columns={columns}
+          defaultPageSize={50}
           className='-striped -highlight'
         />
         <Modal open={this.state.open} onClose={this.onCloseModal} little>

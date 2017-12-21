@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import config from './components/firebase-config';
 import Modal from 'react-responsive-modal';
 import Notifications, {notify} from 'react-notify-toast';
+import axios from 'axios';
 
 const MODAL_TIMEOUT = 3000;
 const RSVP_CODE = 'luqman';
@@ -24,13 +25,14 @@ class App extends Component {
     reception: false,
     brunch: false,
     open: false,
-    showForm: false
+    showForm: false,
+    formSubmitted: false
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    firebase.database().ref('rsvp').push({
+    const guest = {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
@@ -38,11 +40,14 @@ class App extends Component {
       nikah: this.state.nikah,
       reception: this.state.reception,
       brunch: this.state.brunch
-    });
+    };
+    firebase.database().ref('rsvp').push(guest);
+    axios.post('https://formspree.io/nikamirulmukmeen@gmail.com', guest);
     this.onOpenModal();
     setTimeout(() => {
       this.onCloseModal();
     }, MODAL_TIMEOUT);
+    this.setState({ formSubmitted: true });
   };
 
   handleCodeSubmit = (e) => {
@@ -101,10 +106,12 @@ class App extends Component {
   };
 
   render() {
+    const { open, nikah, reception, brunch, attending, showForm, formSubmitted } = this.state;
+
     return (
       <article className="post featured">
         <Notifications />
-        {!this.state.showForm &&
+        {!showForm &&
           <div>
             <header className="major">
               <h2>RSVP</h2>
@@ -124,7 +131,7 @@ class App extends Component {
             </form>
           </div>
         }
-        {this.state.showForm &&
+        {showForm &&
           <div>
             <header className="major">
               <h2>RSVP</h2>
@@ -142,7 +149,21 @@ class App extends Component {
                   <input type="text" name="demo-phone" id="demo-phone" placeholder="Phone" onChange={this.updatePhone} />
                 </div>
                 <div className="4u$ 12u$(small)" style={{textAlign: 'left'}}>
-                  <input type="text" name="demo-attending" id="demo-attending" placeholder="# of people attending" onChange={this.updateAttending} />
+                  <div className="select-wrapper">
+                    <select name="demo-attending" id="demo-attending" onChange={this.updateAttending}>
+                      <option value="1"># of people attending</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{textAlign: 'center'}}>
@@ -150,40 +171,40 @@ class App extends Component {
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
-                  <input type="checkbox" id="nikah" name="nikah" checked={this.state.nikah} onChange={this.updateNikah} />
+                  <input type="checkbox" id="nikah" name="nikah" checked={nikah} onChange={this.updateNikah} />
                   <label htmlFor="nikah">Nikah - Saturday, June 14 2018 6.00pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
-                  <input type="checkbox" id="reception" name="reception" checked={this.state.reception} onChange={this.updateReception} />
+                  <input type="checkbox" id="reception" name="reception" checked={reception} onChange={this.updateReception} />
                   <label htmlFor="reception">Reception - Saturday, June 14 2018 7.30pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
-                  <input type="checkbox" id="brunch" name="brunch" checked={this.state.brunch} onChange={this.updateBrunch} />
+                  <input type="checkbox" id="brunch" name="brunch" checked={brunch} onChange={this.updateBrunch} />
                   <label htmlFor="brunch">Brunch - Sunday, June 15th 2018 11.00am</label>
                 </div>
                 <div className="12u$" style={{textAlign: 'center'}}>
-                  <input type="submit" value="RSVP" className="special" onClick={this.handleSubmit} />
+                  <input type="submit" value="RSVP" className="special" onClick={this.handleSubmit} disabled={formSubmitted} />
                 </div>
               </div>
             </form>
-            <Modal open={this.state.open} onClose={this.onCloseModal} little>
+            <Modal open={open} onClose={this.onCloseModal} little>
               <div style={{textAlign: 'center', padding: '25px 15px'}}>
                 <h2>RSVP sent successfully!</h2>
                 <p style={{textAlign: 'center', margin: 0}}>You have just RSVP for </p>
                 <ul style={{listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold'}}>
-                  {this.state.nikah &&
+                  {nikah &&
                     <li>Nikah</li>
                   }
-                  {this.state.reception &&
+                  {reception &&
                     <li>Reception</li>
                   }
-                  {this.state.brunch &&
+                  {brunch &&
                     <li>Brunch</li>
                   }
                 </ul>
-                <p style={{textAlign: 'center', margin: 0}}>for {this.state.attending} people.</p>
+                <p style={{textAlign: 'center', margin: 0}}>for {attending} people.</p>
               </div>
             </Modal>
           </div>
@@ -193,4 +214,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('rsvp'));
+render(<App />, document.getElementById('main'));

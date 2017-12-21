@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  // webpack folder's entry js - excluded from jekll's build process.
   entry: {
     'guestbook': './webpack/guestbook.js',
     'guestlist': './webpack/guestlist.js',
@@ -19,9 +18,8 @@ module.exports = {
     })
   ],
   output: {
-    // we're going to put the generated file in the assets folder so jekyll will grab it.
-      path: __dirname + '/assets/js/',
-      filename: '[name].js'
+    path: __dirname + '/assets/js/',
+    filename: '[name].js'
   },
   module: {
     loaders: [
