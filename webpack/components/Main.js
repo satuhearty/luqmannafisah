@@ -63,7 +63,6 @@ class Main extends Component {
         formData.append("upload_preset", "hwscws6c");
         formData.append("api_key", "317678834666434");
         formData.append("timestamp", (Date.now() / 1000) | 0);
-
         return axios.post("https://api.cloudinary.com/v1_1/satuhearty/image/upload", formData, {
           headers: { "X-Requested-With": "XMLHttpRequest" },
         }).then(response => {

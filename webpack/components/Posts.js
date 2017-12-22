@@ -71,7 +71,6 @@ class Posts extends Component {
         snapshot.forEach(post => {
           if (this.state.loadedPostIds.indexOf(post.key) === -1) {
             loadedPostIds.push(post.key);
-
             posts.push({
               key: post.key,
               author: post.val().author,

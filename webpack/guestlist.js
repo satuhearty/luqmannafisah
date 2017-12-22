@@ -206,13 +206,13 @@ class App extends Component {
         <Modal open={this.state.open} onClose={this.onCloseModal} little>
           <div style={{textAlign: 'center', padding: '25px 15px'}}>
             <h2>Guest Details</h2>
-            <p style={{margin: 0}}>Name: {currentData.name}</p>
-            <p style={{margin: 0}}>Email: {currentData.email}</p>
-            <p style={{margin: 0}}>Phone: {currentData.phone}</p>
-            <p style={{margin: 0}}><span style={{fontWeight: 'bold', fontStyle: 'italic'}}>{currentData.attending}</span> attending</p>
-            <p style={{margin: 0}}>{this.getGuestRsvpData(currentData.nikah)} Nikah</p>
-            <p style={{margin: 0}}>{this.getGuestRsvpData(currentData.reception)} Reception</p>
-            <p style={{margin: 0}}>{this.getGuestRsvpData(currentData.brunch)} Brunch</p>
+            <p style={{ margin: 0 }}>Name: {currentData.name}</p>
+            <p style={{ margin: 0 }}>Email: {currentData.email}</p>
+            <p style={{ margin: 0 }}>Phone: {currentData.phone}</p>
+            <p style={{ margin: 0 }}><span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{currentData.attending}</span> attending</p>
+            <p style={{ margin: 0 }}>{this.getGuestRsvpData(currentData.nikah)} Nikah</p>
+            <p style={{ margin: 0 }}>{this.getGuestRsvpData(currentData.reception)} Reception</p>
+            <p style={{ margin: 0 }}>{this.getGuestRsvpData(currentData.brunch)} Brunch</p>
           </div>
         </Modal>
       </div>

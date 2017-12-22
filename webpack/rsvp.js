@@ -120,11 +120,11 @@ class App extends Component {
             <form className="alt" method="post" action="#">
               <div className="row uniform">
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <input type="text" name="demo-code" id="demo-code" placeholder="RSVP Code" onChange={this.updateCode} />
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="12u$" style={{textAlign: 'center'}}>
+                <div className="12u$" style={{ textAlign: 'center' }}>
                   <input type="submit" value="Submit" className="special" onClick={this.handleCodeSubmit} />
                 </div>
               </div>
@@ -148,7 +148,7 @@ class App extends Component {
                 <div className="4u 12u$(small)">
                   <input type="text" name="demo-phone" id="demo-phone" placeholder="Phone" onChange={this.updatePhone} />
                 </div>
-                <div className="4u$ 12u$(small)" style={{textAlign: 'left'}}>
+                <div className="4u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <div className="select-wrapper">
                     <select name="demo-attending" id="demo-attending" onChange={this.updateAttending}>
                       <option value="1"># of people attending</option>
@@ -166,34 +166,34 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{textAlign: 'center'}}>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'center' }}>
                   I will be attending:
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <input type="checkbox" id="nikah" name="nikah" checked={nikah} onChange={this.updateNikah} />
                   <label htmlFor="nikah">Nikah - Saturday, June 14 2018 6.00pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <input type="checkbox" id="reception" name="reception" checked={reception} onChange={this.updateReception} />
                   <label htmlFor="reception">Reception - Saturday, June 14 2018 7.30pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{textAlign: 'left'}}>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <input type="checkbox" id="brunch" name="brunch" checked={brunch} onChange={this.updateBrunch} />
                   <label htmlFor="brunch">Brunch - Sunday, June 15th 2018 11.00am</label>
                 </div>
-                <div className="12u$" style={{textAlign: 'center'}}>
+                <div className="12u$" style={{ textAlign: 'center' }}>
                   <input type="submit" value="RSVP" className="special" onClick={this.handleSubmit} disabled={formSubmitted} />
                 </div>
               </div>
             </form>
             <Modal open={open} onClose={this.onCloseModal} little>
-              <div style={{textAlign: 'center', padding: '25px 15px'}}>
+              <div style={{ textAlign: 'center', padding: '25px 15px' }}>
                 <h2>RSVP sent successfully!</h2>
-                <p style={{textAlign: 'center', margin: 0}}>You have just RSVP for </p>
-                <ul style={{listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold'}}>
+                <p style={{ textAlign: 'center', margin: 0 }}>You have just RSVP for </p>
+                <ul style={{ listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold' }}>
                   {nikah &&
                     <li>Nikah</li>
                   }
@@ -204,7 +204,7 @@ class App extends Component {
                     <li>Brunch</li>
                   }
                 </ul>
-                <p style={{textAlign: 'center', margin: 0}}>for {attending} people.</p>
+                <p style={{ textAlign: 'center', margin: 0 }}>for {attending} people.</p>
               </div>
             </Modal>
           </div>
