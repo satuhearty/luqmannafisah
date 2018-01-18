@@ -19,7 +19,8 @@ $timeline-container-width:100%;
   max-width: $timeline-width;
   position: relative;
   &__content {
-    &-title {
+    &-title,
+    &-subtitle {
       font-weight: normal;
       font-size: 66px;
       margin: -10px 0 0 0;
@@ -29,7 +30,14 @@ $timeline-container-width:100%;
       font-family: $heading-font;
       color: #fff;
     }
+    &-title {
+      font-size: 66px;
+    }
+    &-subtitle {
+      font-size: 30px;
+    }
     &-desc {
+      text-align: center;
       margin: 0;
       font-size: 15px;
       box-sizing: border-box;
@@ -67,7 +75,7 @@ $timeline-container-width:100%;
       width: 100%;
       position: absolute;
       color: rgba(#fff, .5);
-      font-size: 13px;
+      font-size: 1em;
       font-family: $heading-font;
       border-left: 2px solid rgba(#fff, .5);
       top: 70%;
@@ -98,7 +106,7 @@ $timeline-container-width:100%;
         opacity: 1;
       }
       .timeline__content-title {
-        margin: -50px 0 20px 0;
+        margin: -50px 0 0 0;
       }
     }
     @include responsive() {
@@ -171,4 +179,8 @@ $timeline-container-width:100%;
     display: inline-block;
     font-family: $content-font;
   }
+}
+
+.event-details {
+  text-align: left;
 }

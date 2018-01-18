@@ -1,11 +1,10 @@
 ---
 layout: us
-title: Jekyll Theme - About - Massively
-description: When building a website it's helpful to see what the focus of your site is. This page is an example of how to show a website's focus.
+title: Luqman & Nafisah | Us
+description: A little bit about us.
 sitemap:
     priority: 0.7
-    lastmod: 2017-11-02
-    changefreq: weekly
+    lastmod: 2018-01-17
 ---
 ## The Couple
 
