@@ -132,7 +132,9 @@ class Posts extends Component {
             );
           })}
         </MasonryLayout>
-        <Loading type='hearts' width={100} height={100} fill='#f44242' />
+        {this.state.loading &&
+          <Loading type='hearts' width={100} height={100} fill='#f44242' />
+        }
       </div>
     );
   }

@@ -131,58 +131,60 @@ class Main extends Component {
           />
         }
         <Modal open={this.state.open} onClose={this.onCloseModal}>
-          <h2>Wedding message</h2>
-          <p>
-            Send your warmest love to the newly weds! Your wedding messages will be shown shortly.
-          </p>
-          <form method="post" action="#" className="alt">
-            <div className="row uniform">
-              <div className="12u$">
-                <input type="text" name="demo-name" id="demo-name" placeholder="Name" onChange={this.updateAuthor} />
-              </div>
-              <div className="12u$">
-                <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" onChange={this.updateMessage} />
-              </div>
-              <div className="12u$">
-                <div className="dropzone">
-                  <Dropzone
-                    ref="dropzone"
-                    onDrop={this.onDrop}
-                    style={{ width: 'auto', height: 'auto' }}
-                  >
-                    {this.state.files.length <= 0 &&
-                      <div className="dz-default dz-message">
-                        <span>Drop files here to upload</span>
-                      </div>
-                    }
-                    {this.state.files.length > 0 &&
-                      <div>
-                        {this.state.files.map(file => (
-                          <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
-                            <div className="dz-image">
-                              <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />
+          <div style={{ textAlign: 'center', padding: '25px 15px' }}>
+            <h2>Wedding message</h2>
+            <p>
+              Send your warmest love to the newly weds! Your wedding messages will be shown shortly.
+            </p>
+            <form method="post" action="#" className="alt">
+              <div className="row uniform">
+                <div className="12u$">
+                  <input type="text" name="demo-name" id="demo-name" placeholder="Name" onChange={this.updateAuthor} />
+                </div>
+                <div className="12u$">
+                  <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" onChange={this.updateMessage} />
+                </div>
+                <div className="12u$">
+                  <div className="dropzone">
+                    <Dropzone
+                      ref="dropzone"
+                      onDrop={this.onDrop}
+                      style={{ width: 'auto', height: 'auto' }}
+                    >
+                      {this.state.files.length <= 0 &&
+                        <div className="dz-default dz-message">
+                          <span>Drop files here to upload</span>
+                        </div>
+                      }
+                      {this.state.files.length > 0 &&
+                        <div>
+                          {this.state.files.map(file => (
+                            <div key={file.name} className="dz-preview dz-processing dz-success dz-complete dz-image-preview">
+                              <div className="dz-image">
+                                <img data-dz-thumbnail="" alt="boston.jpg" src={file.preview} />
+                              </div>
+                              <div className="dz-progress">
+                                <span className="dz-upload" data-dz-uploadprogress="" />
+                              </div>
+                              <a href="javascript:undefined;" className="icon alt fa-2x fa-times-circle-o" onClick={this.removeFile}>
+                                <span className="label">Remove</span>
+                              </a>
                             </div>
-                            <div className="dz-progress">
-                              <span className="dz-upload" data-dz-uploadprogress="" />
-                            </div>
-                            <a href="javascript:undefined;" className="icon alt fa-2x fa-times-circle-o" onClick={this.removeFile}>
-                              <span className="label">Remove</span>
-                            </a>
-                          </div>
-                        ))}
-                      </div>
-                    }
-                  </Dropzone>
+                          ))}
+                        </div>
+                      }
+                    </Dropzone>
+                  </div>
+                </div>
+                <div className="12u$">
+                  <ul className="actions">
+                    <li><input type="submit" value="Submit" className="special" onClick={this.handleSubmit} /></li>
+                    <li><input type="reset" value="Cancel" onClick={this.onCloseModal} /></li>
+                  </ul>
                 </div>
               </div>
-              <div className="12u$">
-                <ul className="actions">
-                  <li><input type="submit" value="Submit" className="special" onClick={this.handleSubmit} /></li>
-                  <li><input type="reset" value="Cancel" onClick={this.onCloseModal} /></li>
-                </ul>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </Modal>
       </div>
     )

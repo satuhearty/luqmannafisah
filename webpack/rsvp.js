@@ -7,7 +7,7 @@ import Notifications, {notify} from 'react-notify-toast';
 import axios from 'axios';
 
 const MODAL_TIMEOUT = 3000;
-const RSVP_CODE = 'luqman';
+const RSVP_CODE = 'luqmannafis';
 
 class App extends Component {
   constructor() {
@@ -21,9 +21,8 @@ class App extends Component {
     email: '',
     phone: '',
     attending: 1,
-    nikah: false,
-    reception: false,
-    brunch: false,
+    nafis: false,
+    luqman: false,
     open: false,
     showForm: false,
     formSubmitted: false
@@ -37,9 +36,8 @@ class App extends Component {
       email: this.state.email,
       phone: this.state.phone,
       attending: this.state.attending,
-      nikah: this.state.nikah,
-      reception: this.state.reception,
-      brunch: this.state.brunch
+      nafis: this.state.nafis,
+      luqman: this.state.luqman
     };
     firebase.database().ref('rsvp').push(guest);
     axios.post('https://formspree.io/nikamirulmukmeen@gmail.com', guest);
@@ -85,16 +83,12 @@ class App extends Component {
     this.setState({ attending: e.target.value });
   };
 
-  updateNikah = () => {
-    this.setState({ nikah: !this.state.nikah });
+  updateNafis = () => {
+    this.setState({ nafis: !this.state.nafis });
   };
 
-  updateReception = () => {
-    this.setState({ reception: !this.state.reception });
-  };
-
-  updateBrunch = () => {
-    this.setState({ brunch: !this.state.brunch });
+  updateLuqman = () => {
+    this.setState({ luqman: !this.state.luqman });
   };
 
   onOpenModal = () => {
@@ -106,7 +100,7 @@ class App extends Component {
   };
 
   render() {
-    const { open, nikah, reception, brunch, attending, showForm, formSubmitted } = this.state;
+    const { open, nafis, luqman, attending, showForm, formSubmitted } = this.state;
 
     return (
       <article className="post featured">
@@ -171,18 +165,13 @@ class App extends Component {
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
-                  <input type="checkbox" id="nikah" name="nikah" checked={nikah} onChange={this.updateNikah} />
-                  <label htmlFor="nikah">Nikah - Saturday, June 14 2018 6.00pm</label>
+                  <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
+                  <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
-                  <input type="checkbox" id="reception" name="reception" checked={reception} onChange={this.updateReception} />
-                  <label htmlFor="reception">Reception - Saturday, June 14 2018 7.30pm</label>
-                </div>
-                <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
-                  <input type="checkbox" id="brunch" name="brunch" checked={brunch} onChange={this.updateBrunch} />
-                  <label htmlFor="brunch">Brunch - Sunday, June 15th 2018 11.00am</label>
+                  <input type="checkbox" id="luqman" name="luqman" checked={luqman} onChange={this.updateLuqman} />
+                  <label htmlFor="luqman">Luqman's Side - Saturday, 28 July 2018, 6-11pm</label>
                 </div>
                 <div className="12u$" style={{ textAlign: 'center' }}>
                   <input type="submit" value="RSVP" className="special" onClick={this.handleSubmit} disabled={formSubmitted} />
@@ -194,14 +183,11 @@ class App extends Component {
                 <h2>RSVP sent successfully!</h2>
                 <p style={{ textAlign: 'center', margin: 0 }}>You have just RSVP for </p>
                 <ul style={{ listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold' }}>
-                  {nikah &&
-                    <li>Nikah</li>
+                  {nafis &&
+                    <li>Nafis' nafis</li>
                   }
-                  {reception &&
-                    <li>Reception</li>
-                  }
-                  {brunch &&
-                    <li>Brunch</li>
+                  {luqman &&
+                    <li>Luqman's nafis</li>
                   }
                 </ul>
                 <p style={{ textAlign: 'center', margin: 0 }}>for {attending} people.</p>
