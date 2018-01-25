@@ -31,6 +31,22 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (this.state.name === '') {
+      this.createNotification('Please enter your name.', 'error');
+      return;
+    }
+
+    if (this.state.phone === '' && this.state.email === '') {
+      this.createNotification('Please enter your phone number or email address.', 'error');
+      return;
+    }
+
+    if (this.state.nafis === false && this.state.luqman === false) {
+      this.createNotification('Please select at least 1 event.', 'error');
+      return;
+    }
+
     const guest = {
       name: this.state.name,
       email: this.state.email,
@@ -42,9 +58,6 @@ class App extends Component {
     firebase.database().ref('rsvp').push(guest);
     axios.post('https://formspree.io/nikamirulmukmeen@gmail.com', guest);
     this.onOpenModal();
-    setTimeout(() => {
-      this.onCloseModal();
-    }, MODAL_TIMEOUT);
     this.setState({ formSubmitted: true });
   };
 
@@ -184,13 +197,14 @@ class App extends Component {
                 <p style={{ textAlign: 'center', margin: 0 }}>You have just RSVP for </p>
                 <ul style={{ listStyle: 'none', margin: 0, fontStyle: 'italic', fontWeight: 'bold' }}>
                   {nafis &&
-                    <li>Nafis' nafis</li>
+                    <li>Nafis' reception</li>
                   }
                   {luqman &&
-                    <li>Luqman's nafis</li>
+                    <li>Luqman's reception</li>
                   }
                 </ul>
                 <p style={{ textAlign: 'center', margin: 0 }}>for {attending} people.</p>
+                <p style={{ textAlign: 'center', margin: 0 }}>Be sure to upload your photos at our wedding to our photo album <a href="/photos" target="_blank">here</a>.</p>
               </div>
             </Modal>
           </div>

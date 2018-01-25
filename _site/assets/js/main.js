@@ -20,65 +20,48 @@
 	 * @return {jQuery} jQuery object.
 	 */
 	$.fn._parallax = function(intensity) {
+		var	$window = $(window), $this = $(this);
 
-		var	$window = $(window),
-			$this = $(this);
-
-		if (this.length == 0 || intensity === 0)
-			return $this;
+		if (this.length === 0 || intensity === 0) {
+      return $this;
+    }
 
 		if (this.length > 1) {
-
-			for (var i=0; i < this.length; i++)
-				$(this[i])._parallax(intensity);
-
+			for (var i = 0; i < this.length; i++) {
+        $(this[i])._parallax(intensity);
+      }
 			return $this;
-
 		}
 
-		if (!intensity)
-			intensity = 0.25;
+		if (!intensity) {
+      intensity = 0.25;
+    }
 
 		$this.each(function() {
-
 			var $t = $(this),
 				$bg = $('<div class="bg"></div>').appendTo($t),
 				on, off;
 
 			on = function() {
-
-				$bg
-					.removeClass('fixed')
-					.css('transform', 'matrix(1,0,0,1,0,0)');
-
+				$bg.removeClass('fixed').css('transform', 'matrix(1,0,0,1,0,0)');
 			};
 
 			off = function() {
-
-				$bg
-					.addClass('fixed')
-					.css('transform', 'none');
-
-				$window
-					.off('scroll._parallax');
-
+				$bg.addClass('fixed').css('transform', 'none');
+				$window.off('scroll._parallax');
 			};
 
 			// Disable parallax on ..
-				if (skel.vars.browser == 'ie'		// IE
-				||	skel.vars.browser == 'edge'		// Edge
-				||	window.devicePixelRatio > 1		// Retina/HiDPI (= poor performance)
-				||	skel.vars.mobile)				// Mobile devices
-					off();
-
-			// Enable everywhere else.
-				else {
-
+				if (skel.vars.browser === 'ie'  // IE
+          ||	skel.vars.browser === 'edge'		// Edge
+				  ||	window.devicePixelRatio > 1		// Retina/HiDPI (= poor performance)
+				  ||	skel.vars.mobile
+        ) {				// Mobile devices
+          off();
+        } else {
 					skel.on('!large -large', on);
 					skel.on('+large', off);
-
 				}
-
 		});
 
 		$window
@@ -88,11 +71,9 @@
 			});
 
 		return $(this);
-
 	};
 
 	$(function() {
-
 		var	$window = $(window),
 			$body = $('body'),
 			$wrapper = $('#wrapper'),
@@ -123,7 +104,6 @@
 			$wrapper._parallax(0.925);
 
 		// Nav Panel.
-
 			// Toggle.
 				$navPanelToggle = $(
 					'<a href="#navPanel" id="navPanelToggle">Menu</a>'
@@ -255,6 +235,17 @@
 			}
 
 	});
+
+	var $countDown = $('.js-countdown-timer');
+	if ($countDown.length !== 0) {
+    $('.js-countdown-timer').countdown('2018/07/14', {elapse: true}).on('update.countdown', function(event) {
+      if (event.elapsed) {
+        $(this).html(event.strftime('%D days %H:%M:%S'));
+      } else {
+        $(this).html(event.strftime('%D days %H:%M:%S'));
+      }
+    });
+  }
 
   $.fn.timeline = function() {
     var selectors = {

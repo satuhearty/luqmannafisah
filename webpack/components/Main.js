@@ -16,6 +16,8 @@ class Main extends Component {
   state = {
     open: false,
     author: '',
+    phone: '',
+    email: '',
     message: '',
     files: [],
     count: 0
@@ -34,6 +36,14 @@ class Main extends Component {
 
   updateAuthor = (e) => {
     this.setState({ author: e.target.value });
+  };
+
+  updatePhone = (e) => {
+    this.setState({ phone: e.target.value });
+  };
+
+  updateEmail = (e) => {
+    this.setState({ email: e.target.value });
   };
 
   onOpenModal = () => {
@@ -78,6 +88,8 @@ class Main extends Component {
 
     firebase.database().ref('posts').push({
       author: this.state.author,
+      phone: this.state.phone,
+      email: this.state.email,
       message: this.state.message,
       upvote: 0,
       image: imageUrl
@@ -87,6 +99,8 @@ class Main extends Component {
 
     this.setState({
       author: '',
+      phone: '',
+      email: '',
       message: '',
       files: [],
       count: newCount
@@ -139,10 +153,16 @@ class Main extends Component {
             <form method="post" action="#" className="alt">
               <div className="row uniform">
                 <div className="12u$">
-                  <input type="text" name="demo-name" id="demo-name" placeholder="Name" onChange={this.updateAuthor} />
+                  <input type="text" name="name" id="name" placeholder="Name *" onChange={this.updateAuthor} />
+                </div>
+                <div className="6u">
+                  <input type="text" name="phone" id="phone" placeholder="Phone" onChange={this.updatePhone} />
+                </div>
+                <div className="6u$">
+                  <input type="email" name="email" id="email" placeholder="Email" onChange={this.updateEmail} />
                 </div>
                 <div className="12u$">
-                  <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6" onChange={this.updateMessage} />
+                  <textarea name="demo-message" id="demo-message" placeholder="Enter your message *" rows="6" onChange={this.updateMessage} />
                 </div>
                 <div className="12u$">
                   <div className="dropzone">

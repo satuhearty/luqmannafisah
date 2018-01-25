@@ -1,10 +1,12 @@
-<!-- DYN -->
 <script src="{{ site.url }}/assets/js/jquery.min.js"></script>
 <script src="{{ site.url }}/assets/js/jquery.scrollex.min.js"></script>
 <script src="{{ site.url }}/assets/js/jquery.scrolly.min.js"></script>
 <script src="{{ site.url }}/assets/js/skel.min.js"></script>
 <script src="{{ site.url }}/assets/js/util.js"></script>
-<script src="{{ site.url }}/assets/js/main.js"></script>
+
+{% if page.type == 'homepage' %}
+  <script type="text/javascript" src="{{ site.url }}/assets/js/jquery.countdown.min.js"></script>
+{% endif %}
 
 {% if page.layout == 'rsvp' %}
   <script type="text/javascript" src="{{ site.url }}/assets/js/rsvp.js"></script>
@@ -17,3 +19,5 @@
 {% if page.layout == 'guestlist' %}
   <script type="text/javascript" src="{{ site.url }}/assets/js/guestlist.js"></script>
 {% endif %}
+
+<script src="{{ site.url }}/assets/js/main.js"></script>

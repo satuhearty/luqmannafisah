@@ -44,6 +44,7 @@
 			display: block;
 			width: 100%;
 			margin: 0 0 _size(element-margin) 0;
+            color: _palette($p, fg-bold);
 
 			> .actions {
 				margin: 0 0 _size(element-margin) 0;
@@ -105,7 +106,6 @@
 		background: transparent;
 		border-radius: _size(border-radius);
 		border: solid 2px;
-		color: inherit;
 		display: block;
 		outline: 0;
 		padding: 0 1rem;
@@ -265,7 +265,6 @@
 		input[type="checkbox"],
 		input[type="radio"], {
 			& + label {
-				color: _palette($p, fg);
 
 				&:before {
 					border-color: _palette($p, border);

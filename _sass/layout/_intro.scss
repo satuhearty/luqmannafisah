@@ -8,7 +8,7 @@
 
 	#intro {
 		@include color-typography(invert);
-		@include color-button(invert);
+		//@include color-button(invert);
 		@include padding(_size(padding) * 8, _size(padding) * 2);
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
@@ -27,6 +27,7 @@
 		h1 {
 			font-size: 5rem;
 			line-height: 1;
+            color: #1e252d;
 		}
 
 		p {
@@ -35,6 +36,11 @@
 			margin-top: -0.25rem;
 			text-align: center;
 		}
+
+        a {
+          color: #1e252d !important;
+          box-shadow: inset 0 0 0 2px #212931;
+        }
 
 		& + #header {
 			margin-top: -20rem;

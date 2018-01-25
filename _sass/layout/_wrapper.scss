@@ -20,11 +20,11 @@
     margin: auto;
     width: 100%;
     height: 100%;
-    background-color: _palette(wrapper-bg);
-    background-image: url('../../images/overlay.png'), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../images/bg.jpg');
+    background-color: #ffffff;
+    background-image: url('https://d3jzug80jq9bku.cloudfront.net/assets/rileyandgrey/images/goldpaint/gold/homebg_top-d81c232838c7b18b6cbd0259a1b19b119069c3a68b9efb505dddfc66bc9cf6d7.jpg'),url('https://d3jzug80jq9bku.cloudfront.net/assets/rileyandgrey/images/goldpaint/gold/homebg_bottom-406a96af1995c9e9bf8dcc411be833f9f037ec33e7ee4a862af5e8fdc0be7a96.jpg'); //url('../../images/overlay.png'), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../../images/bg.jpg');
     background-size: auto, auto, cover;
-    background-position: center, center, top center;
-    background-repeat: repeat, no-repeat, no-repeat;
+    background-position: center 0, center bottom;
+    background-repeat: repeat-x, repeat-x;
     background-attachment: scroll, scroll, scroll;
     z-index: -1;
 

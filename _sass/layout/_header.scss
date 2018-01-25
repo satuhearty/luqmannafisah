@@ -7,7 +7,7 @@
 /* Header */
 
 	#header {
-		@include color-typography(invert);
+		//@include color-typography(invert);
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
 		@include vendor('flex-direction', 'column');
@@ -19,6 +19,7 @@
 		position: relative;
 		text-align: center;
 		z-index: 2;
+        color: _palette(invert, bg);
 
 		.logo {
 			@include vendor('transition', (
@@ -30,7 +31,8 @@
 			));
 			@include vendor('pointer-events', 'auto');
 			border-style: solid;
-			border-color: _palette(invert, border);
+            color: _palette(invert, bg);
+			border-color: _palette(invert, bg);
 			border-width: 5px !important;
 			font-family: _font(family-heading);
 			font-size: 2.25rem;
