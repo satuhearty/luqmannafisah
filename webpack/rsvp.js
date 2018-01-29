@@ -177,12 +177,12 @@ class App extends Component {
                   I will be attending:
                 </div>
                 <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                <div className="6u$ 12u$(small)">
                   <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
                   <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
                 </div>
-                <div className="3u 12u$(small)" />
-                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                <div className="2u 12u$(small)" />
+                <div className="8u$ 12u$(small)">
                   <input type="checkbox" id="luqman" name="luqman" checked={luqman} onChange={this.updateLuqman} />
                   <label htmlFor="luqman">Luqman's Side - Saturday, 28 July 2018, 6-11pm</label>
                 </div>

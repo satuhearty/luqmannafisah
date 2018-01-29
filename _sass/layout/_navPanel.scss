@@ -57,7 +57,7 @@
 		@include vendor('transition', ('transform #{_duration(menu)} ease', 'box-shadow #{_duration(menu)} ease', 'visibility #{_duration(menu)}'));
 		display: none;
 		-webkit-overflow-scrolling: touch;
-		background: _palette(bg);
+		background: rgba(27,31,34,.95);
 		box-shadow: none;
 		color: _palette(fg-bold);
 		height: 100%;
@@ -76,7 +76,7 @@
 			padding-left: 0;
 
 			li {
-				border-top: solid 2px _palette(border);
+				//border-top: solid 2px _palette(border);
 
 				a {
 					border-bottom: 0;

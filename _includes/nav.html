@@ -2,6 +2,7 @@
   <li class="{% if page.url == "/" %} active {% endif %}"><a href="{{ "/" | absolute_url }}">Home</a></li>
   <li class="{% if page.url contains '/us/' %} active {% endif %}"><a href="{{ "/us/" | absolute_url }}">Us</a></li>
   <li class="{% if page.url contains '/story/' %} active {% endif %}"><a href="{{ "/story/" | absolute_url }}">Story</a></li>
+  <li class="{% if page.url contains '/bridesmaids/' %} active {% endif %}"><a href="{{ "/bridesmaids/" | absolute_url }}">Bridesmaids</a></li>
   <li class="{% if page.url contains '/event/' %} active {% endif %}"><a href="{{ "/event/" | absolute_url }}">Event</a></li>
   <li class="{% if page.url contains '/rsvp/' %} active {% endif %}"><a href="{{ "/rsvp/" | absolute_url }}">RSVP</a></li>
   <li class="{% if page.url contains '/photos/' %} active {% endif %}"><a href="{{ "/photos/" | absolute_url }}">Photos</a></li>

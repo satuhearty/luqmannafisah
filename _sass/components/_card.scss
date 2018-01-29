@@ -223,7 +223,6 @@
 
 .Instagram-card{
   background: #ffffff;
-  border: 1px solid #f2f2f2;
   border-radius: 3px;
   width: 100%;
   max-width: 600px;
@@ -432,7 +431,13 @@ hr{
 
 }
 
+.Modal-modal-0-3 {
+  background: rgba(27,31,34,1) !important;
+}
 
+.Modal-closeIcon-0-4 {
+  fill: white;
+}
 
 .dropzone, .dropzone * {
   box-sizing: border-box;
@@ -459,7 +464,7 @@ hr{
   text-align: center;
   min-height: 150px;
   border: 2px solid rgba(0, 0, 0, 0.3);
-  background: white;
+  background: #999;
   padding: 20px 20px;
 
   &.dz-started {
