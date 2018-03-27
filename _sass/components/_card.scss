@@ -969,3 +969,16 @@ hr{
     opacity: 0
   }
 }
+
+.bridesmaid {
+  &-girl {
+    display: inline-block;
+  }
+  &-image {
+    max-width: 100%;
+  }
+  &-description {
+    text-align: left;
+    color: _palette(fg-bold);
+  }
+}

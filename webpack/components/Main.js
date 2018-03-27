@@ -173,7 +173,7 @@ class Main extends Component {
                     >
                       {this.state.files.length <= 0 &&
                         <div className="dz-default dz-message">
-                          <span>Drop files here to upload</span>
+                          <span>Upload an image here.</span>
                         </div>
                       }
                       {this.state.files.length > 0 &&
