@@ -73,15 +73,15 @@
     margin-top: -12px;
   }
   &.cd-index {
-    background: _palette(alt, bg);
-    color: _palette(bg);
+    background: _palette(fg-bold);
+    color: _palette(alt, bg);
     &.key-project {
       background: _palette(accent6);
     }
     h3 {
       margin: 0;
       text-align: center;
-      color: _palette(fg);
+      color: _palette(alt, bg);
       padding: 7px 0 0 0;
     }
   }
@@ -116,7 +116,7 @@
     -webkit-backface-visibility: hidden;
     &.cd-index {
       h3 {
-        padding: 15px 0 0 0;
+        padding: 10px 0 0 0;
       }
     }
   }

@@ -19,8 +19,8 @@ $size: (
 
 // Font.
 $font: (
-	family:				('Merriweather', Georgia, serif),
-	family-heading:		('Source Sans Pro', Helvetica, sans-serif),
+	family:				('Futura', Georgia, serif),
+	family-heading:		('Futura', Helvetica, sans-serif),
 	family-fixed:		('Courier New', monospace),
 	weight:				300,
 	weight-bold:		600,
@@ -29,34 +29,33 @@ $font: (
 
 // Palette.
 $palette: (
-	wrapper-bg:			#212931,
-
-	bg:					rgba(27,31,34,0.85),
-	fg:					#212931,
-	fg-bold:			#ffffff,
-	fg-light:			mix(#212931, #ffffff, 50%),
-	border:				mix(#dcdcdc, #ffffff, 50%),
-	border-bg:			rgba(#dcdcdc, 0.25),
-	accent:				#18bfef,
+	wrapper-bg:	#212931,
+	bg:			    rgba(240, 220, 156, 0.75),
+	fg:	      	#212931,
+	fg-bold:  	rgba(0 , 0, 0, 0.8),
+	fg-light:	  mix(#212931, #ffffff, 50%),
+	border:			mix(#dcdcdc, #ffffff, 50%),
+	border-bg:	rgba(#dcdcdc, 0.25),
+	accent:			#879098,
 
 	alt: (
-		bg:				#f5f5f5,
-		fg:				#717981,
-		fg-bold:		#717981,
-		fg-light:		mix(#717981, #f5f5f5, 50%),
-		border:			mix(#dcdcdc, #f5f5f5, 75%),
-		border-bg:		rgba(#dcdcdc, 0.5),
-		accent:			#18bfef,
+		bg:				 #f5f5f5,
+		fg:				 #717981,
+		fg-bold:	 #717981,
+		fg-light:	 mix(#717981, #f5f5f5, 50%),
+		border:		 mix(#dcdcdc, #f5f5f5, 75%),
+		border-bg: rgba(#dcdcdc, 0.5),
+		accent:		 #879098,
 	),
 
 	invert: (
-		bg:				#1e252d,
-		bg-alt:			#1e252d,
-		fg:				#ffffff,
-		fg-bold:		#ffffff,
-		fg-light:		rgba(#ffffff, 0.5),
-		border:			#ffffff,
-		border-bg:		rgba(#ffffff,0.075),
-		accent:			#18bfef,
+		bg:				 #1e252d,
+		bg-alt:		 #1e252d,
+		fg:				 #ffffff,
+		fg-bold:	 #ffffff,
+		fg-light:	 rgba(#ffffff, 0.5),
+		border:		 #ffffff,
+		border-bg: rgba(#ffffff,0.075),
+		accent: #879098,
 	),
 );

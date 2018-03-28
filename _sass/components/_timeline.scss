@@ -27,7 +27,7 @@ $timeline-container-width:100%;
       transition: .4s;
       padding: 0 10px;
       box-sizing: border-box;
-      font-family: $heading-font;
+      //font-family: $heading-font;
       color: #fff;
     }
     &-title {
@@ -39,10 +39,9 @@ $timeline-container-width:100%;
     &-desc {
       text-align: center;
       margin: 0;
-      font-size: 15px;
       box-sizing: border-box;
       color: rgba(#fff, .7);
-      font-family: $content-font;
+      //font-family: $content-font;
       font-weight: normal;
       line-height: 25px;
     }
@@ -76,7 +75,7 @@ $timeline-container-width:100%;
       position: absolute;
       color: rgba(#fff, .5);
       font-size: 1em;
-      font-family: $heading-font;
+      //font-family: $heading-font;
       border-left: 2px solid rgba(#fff, .5);
       top: 70%;
       margin-top: -5px;
@@ -155,13 +154,13 @@ $timeline-container-width:100%;
     &__title {
       color: #fff;
       font-size: 46px;
-      font-family: $content-font;
+      //font-family: $content-font;
       font-weight: normal;
       margin: 0;
     }
     &__subtitle {
       color: rgba(255, 255, 255, .5);
-      font-family: $heading-font;
+      //font-family: $heading-font;
       font-size: 16px;
       letter-spacing: 5px;
       margin: 10px 0 0 0;
@@ -177,7 +176,7 @@ $timeline-container-width:100%;
   a {
     color: #999;
     display: inline-block;
-    font-family: $content-font;
+    //font-family: $content-font;
   }
 }
 

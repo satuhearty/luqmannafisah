@@ -20,11 +20,12 @@ class App extends Component {
     name: '',
     email: '',
     phone: '',
+    relation: '',
     attending: 1,
     nafis: false,
     luqman: false,
     open: false,
-    showForm: false,
+    showForm: true,
     formSubmitted: false
   };
 
@@ -51,6 +52,7 @@ class App extends Component {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
+      relation: this.state.relation,
       attending: this.state.attending,
       nafis: this.state.nafis,
       luqman: this.state.luqman
@@ -92,6 +94,10 @@ class App extends Component {
     this.setState({ phone: e.target.value });
   };
 
+  updateRelation = (e) => {
+    this.setState({ relation: e.target.value });
+  };
+
   updateAttending = (e) => {
     this.setState({ attending: e.target.value });
   };
@@ -128,7 +134,7 @@ class App extends Component {
               <div className="row uniform">
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
-                  <input type="text" name="demo-code" id="demo-code" placeholder="RSVP Code" onChange={this.updateCode} />
+                  <input type="text" name="code" id="code" placeholder="RSVP Code" onChange={this.updateCode} />
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="12u$" style={{ textAlign: 'center' }}>
@@ -147,17 +153,40 @@ class App extends Component {
             <form className="alt" method="post" action="#">
               <div className="row uniform">
                 <div className="12u$">
-                  <input type="text" name="demo-name" id="demo-name" placeholder="Name" onChange={this.updateName} />
+                  <input type="text" name="name" id="name" placeholder="Name" onChange={this.updateName} />
                 </div>
-                <div className="4u 12u$(small)">
-                  <input type="email" name="demo-email" id="demo-email" placeholder="Email" onChange={this.updateEmail} />
+                <div className="6u 12u$(small)">
+                  <input type="email" name="email" id="email" placeholder="Email" onChange={this.updateEmail} />
                 </div>
-                <div className="4u 12u$(small)">
-                  <input type="text" name="demo-phone" id="demo-phone" placeholder="Phone" onChange={this.updatePhone} />
+                <div className="6u$ 12u$(small)">
+                  <input type="text" name="phone" id="phone" placeholder="Phone" onChange={this.updatePhone} />
                 </div>
-                <div className="4u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                <div className="6u 12u$(small)">
                   <div className="select-wrapper">
-                    <select name="demo-attending" id="demo-attending" onChange={this.updateAttending}>
+                    <select name="relation" id="relation" onChange={this.updateRelation}>
+                      <option value="">Relation</option>
+                      <optgroup label="Khairun Nafisah">
+                        <option value="baboys">Baboys</option>
+                        <option value="ssp">SSP</option>
+                        <option value="upm-friends">UPM - Friends</option>
+                        <option value="upm-staffs">UPM - Colleagues</option>
+                        <option value="naza">NAZA - Colleagues</option>
+                        <option value="others">Others</option>
+                      </optgroup>
+                      <optgroup label="Luqman Nul Hakim">
+                        <option value="sk-jalan-6">SK Jalan 6</option>
+                        <option value="smk-jalan-4">SML Jalan 4</option>
+                        <option value="asis">ASiS</option>
+                        <option value="taylors">Taylors</option>
+                        <option value="stevens">Stevens</option>
+                        <option value="others">Others</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                  <div className="select-wrapper">
+                    <select name="attending" id="attending" onChange={this.updateAttending}>
                       <option value="1"># of people attending</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
