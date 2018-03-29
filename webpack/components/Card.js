@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RecipeReviewCard extends React.Component {
+class PostCard extends React.Component {
   componentWillMount() {
     if (this.postAlreadyLiked()) {
       this.setState({ liked: true });
@@ -84,4 +84,4 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-export default RecipeReviewCard;
+export default PostCard;

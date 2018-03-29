@@ -5,7 +5,8 @@ module.exports = {
   entry: {
     'guestbook': './webpack/guestbook.js',
     'guestlist': './webpack/guestlist.js',
-    'rsvp': './webpack/rsvp.js'
+    'rsvp': './webpack/rsvp.js',
+    'slideshow': './webpack/slideshow.js',
   },
   plugins: [
     new webpack.DefinePlugin({

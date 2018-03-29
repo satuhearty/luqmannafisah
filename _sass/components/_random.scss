@@ -1,0 +1,32 @@
+.google-maps {
+  position: relative;
+  padding-bottom: 75%; // This is the aspect ratio
+  margin-bottom: 2em;
+  height: 0;
+  overflow: hidden;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  border: 1px solid _palette(fg-bold);
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.margin {
+  &-zero {
+    margin: 0;
+  }
+  &-bottom {
+    &-medium {
+      margin-bottom: 2em;
+    }
+  }
+}
+
+.description {
+  text-align: justify;
+}
