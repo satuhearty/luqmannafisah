@@ -34,44 +34,39 @@ class Memories extends Component {
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-1.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-2.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-3.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-4.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-5.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-6.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-7.jpg" alt=""/></span></div>
               </div>
             </div>
-            <div className="box alt">
+            <div className="alt">
               <div className="row uniform 50%">
                 <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-8.jpg" alt=""/></span></div>
-              </div>
-            </div>
-            <div className="box alt">
-              <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-9.jpg" alt=""/></span></div>
               </div>
             </div>
           </Slider>
