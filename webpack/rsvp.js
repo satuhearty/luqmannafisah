@@ -25,25 +25,31 @@ class App extends Component {
     nafis: false,
     luqman: false,
     open: false,
-    showForm: true,
-    formSubmitted: false
+    showForm: false,
+    formSubmitted: false,
+    attendingArray: [],
+    extraGuests: []
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (this.state.name === '') {
+    const { name, phone, nafis, luqman, relation, attending, extraGuests } = this.state;
+
+    if (name === '') {
       this.createNotification('Please enter your name.', 'error');
       return;
-    }
-
-    if (this.state.phone === '' && this.state.email === '') {
+    } else if (phone === '' && email === '') {
       this.createNotification('Please enter your phone number or email address.', 'error');
       return;
-    }
-
-    if (this.state.nafis === false && this.state.luqman === false) {
+    } else if (relation === '') {
+      this.createNotification('Please select a relation.', 'error');
+      return;
+    } else if (attending > 1 && extraGuests.length !== attending - 1) {
+      this.createNotification('Please enter guest names.', 'error');
+      return;
+    } else if (nafis === false && luqman === false) {
       this.createNotification('Please select at least 1 event.', 'error');
       return;
     }
@@ -54,6 +60,7 @@ class App extends Component {
       phone: this.state.phone,
       relation: this.state.relation,
       attending: this.state.attending,
+      extraGuests: this.state.extraGuests,
       nafis: this.state.nafis,
       luqman: this.state.luqman
     };
@@ -99,7 +106,17 @@ class App extends Component {
   };
 
   updateAttending = (e) => {
-    this.setState({ attending: e.target.value });
+    this.setState({
+      attending: e.target.value,
+      attendingArray: Array(e.target.value - 1).fill(1)
+    });
+  };
+
+  updateGuests = (e) => {
+    const extraGuests = this.state.extraGuests;
+    const guestIndex = e.target.dataset.guestIndex;
+    extraGuests[guestIndex] = e.target.value;
+    this.setState({ extraGuests: extraGuests });
   };
 
   updateNafis = () => {
@@ -119,7 +136,7 @@ class App extends Component {
   };
 
   render() {
-    const { open, nafis, luqman, attending, showForm, formSubmitted } = this.state;
+    const { open, nafis, luqman, attending, showForm, formSubmitted, attendingArray } = this.state;
 
     return (
       <article className="post featured">
@@ -201,6 +218,19 @@ class App extends Component {
                     </select>
                   </div>
                 </div>
+                {attendingArray.map((x, i) => {
+                  return (
+                    <div className="12u$" key={i}>
+                      <input
+                        type="text"
+                        name={`guest-${i}`}
+                        placeholder={`Guest ${i + 1} Name *`}
+                        data-guest-index={i}
+                        onChange={this.updateGuests}
+                      />
+                    </div>
+                  )
+                })}
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'center' }}>
                   I will be attending:
@@ -210,8 +240,8 @@ class App extends Component {
                   <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
                   <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
                 </div>
-                <div className="2u 12u$(small)" />
-                <div className="8u$ 12u$(small)">
+                <div className="3u 12u$(small)" />
+                <div className="6u$ 12u$(small)">
                   <input type="checkbox" id="luqman" name="luqman" checked={luqman} onChange={this.updateLuqman} />
                   <label htmlFor="luqman">Luqman's Side - Saturday, 28 July 2018, 6-11pm</label>
                 </div>
@@ -243,4 +273,4 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('main'));
+render(<App />, document.getElementById('rsvp'));
