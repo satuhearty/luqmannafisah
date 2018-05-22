@@ -3,7 +3,7 @@ import Card from './Card';
 import MasonryLayout from './MasonryLayout';
 import Loading from 'react-loading-components';
 
-const POST_BATCH_LIMIT = 4;
+const POST_BATCH_LIMIT = 6;
 
 class Posts extends Component {
   state = {
