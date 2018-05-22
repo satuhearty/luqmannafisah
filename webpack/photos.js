@@ -31,49 +31,49 @@ class Memories extends Component {
           <Slider {...settings}>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-1.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-1.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-2.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-2.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-3.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-3.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-4.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-4.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-5.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-5.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-6.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-6.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-7.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-7.jpg" alt=""/></span></div>
               </div>
             </div>
             <div className="alt">
               <div className="row uniform 50%">
-                <div className="12u"><span className="image fit"><img src="/luqmannafisah/images/photos-8.jpg" alt=""/></span></div>
+                <div className="12u"><span className="image fit"><img src="/images/photos-8.jpg" alt=""/></span></div>
               </div>
             </div>
           </Slider>
         </article>
         <footer>
           <ul className="actions">
-            <li><a href="/luqmannafisah/guestbook" className="button">Guestbook &raquo;</a></li>
+            <li><a href="/guestbook" className="button">Guestbook &raquo;</a></li>
           </ul>
         </footer>
       </div>
