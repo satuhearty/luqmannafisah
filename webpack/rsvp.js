@@ -7,7 +7,7 @@ import Notifications, {notify} from 'react-notify-toast';
 import axios from 'axios';
 
 const MODAL_TIMEOUT = 3000;
-const RSVP_CODE = 'luqmannafis';
+const RSVP_CODE = 'luqmannafisah';
 
 class App extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class App extends Component {
     email: '',
     phone: '',
     relation: '',
-    attending: 1,
+    attending: 0,
     nafis: false,
     luqman: false,
     open: false,
@@ -35,16 +35,22 @@ class App extends Component {
     e.preventDefault();
     e.stopPropagation();
 
-    const { name, phone, nafis, luqman, relation, attending, extraGuests } = this.state;
+    const { name, email, phone, nafis, luqman, relation, attending, extraGuests } = this.state;
 
     if (name === '') {
       this.createNotification('Please enter your name.', 'error');
       return;
-    } else if (phone === '' && email === '') {
-      this.createNotification('Please enter your phone number or email address.', 'error');
+    } else if (email === '') {
+      this.createNotification('Please enter your email address.', 'error');
+      return;
+    } else if (phone === '') {
+      this.createNotification('Please enter your phone number.', 'error');
       return;
     } else if (relation === '') {
       this.createNotification('Please select a relation.', 'error');
+      return;
+    } else if (attending === 1) {
+      this.createNotification('Please select the number of guests that are attending.', 'error');
       return;
     } else if (attending > 1 && extraGuests.length !== attending - 1) {
       this.createNotification('Please enter guest names.', 'error');
@@ -73,11 +79,14 @@ class App extends Component {
   handleCodeSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (this.state.code === RSVP_CODE) {
+    const { nafis, luqman, code } = this.state;
+    if (nafis === false && luqman === false) {
+      this.createNotification('Please select at least one invitation.', 'error');
+    } else if (this.state.nafis === true && code !== RSVP_CODE) {
+      this.createNotification('Incorrect RSVP Code.', 'error');
+    } else {
       this.createNotification('Success!', 'success');
       this.setState({ showForm: true });
-    } else {
-      this.createNotification('Incorrect RSVP Code.', 'error');
     }
   };
 
@@ -151,7 +160,17 @@ class App extends Component {
               <div className="row uniform">
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
-                  <input type="text" name="code" id="code" placeholder="RSVP Code" onChange={this.updateCode} />
+                  <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
+                  <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
+                </div>
+                <div className="3u 12u$(small)" />
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                  <input type="text" name="code" id="code" placeholder="RSVP Code for Nafis' Side" onChange={this.updateCode} />
+                </div>
+                <div className="3u 12u$(small)" />
+                <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
+                  <input type="checkbox" id="luqman" name="luqman" checked={luqman} onChange={this.updateLuqman} />
+                  <label htmlFor="luqman">Luqman's Side - Saturday, 28 July 2018, 6-11pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="12u$" style={{ textAlign: 'center' }}>
@@ -170,18 +189,18 @@ class App extends Component {
             <form className="alt" method="post" action="#">
               <div className="row uniform">
                 <div className="12u$">
-                  <input type="text" name="name" id="name" placeholder="Name" onChange={this.updateName} />
+                  <input type="text" name="name" id="name" placeholder="Name *" onChange={this.updateName} />
                 </div>
                 <div className="6u 12u$(small)">
-                  <input type="email" name="email" id="email" placeholder="Email" onChange={this.updateEmail} />
+                  <input type="email" name="email" id="email" placeholder="Email *" onChange={this.updateEmail} />
                 </div>
                 <div className="6u$ 12u$(small)">
-                  <input type="text" name="phone" id="phone" placeholder="Phone" onChange={this.updatePhone} />
+                  <input type="text" name="phone" id="phone" placeholder="Phone *" onChange={this.updatePhone} />
                 </div>
                 <div className="6u 12u$(small)">
                   <div className="select-wrapper">
                     <select name="relation" id="relation" onChange={this.updateRelation}>
-                      <option value="">Relation</option>
+                      <option value="">Relation *</option>
                       <optgroup label="Khairun Nafisah">
                         <option value="baboys">Baboys</option>
                         <option value="ssp">SSP</option>
@@ -204,7 +223,7 @@ class App extends Component {
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <div className="select-wrapper">
                     <select name="attending" id="attending" onChange={this.updateAttending}>
-                      <option value="1"># of people attending</option>
+                      <option value="0"># of people attending *</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>

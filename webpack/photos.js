@@ -25,7 +25,7 @@ class Memories extends Component {
           <div style={{ marginBottom: '4em' }}>
             <p style={{ textAlign: 'center' }}>Upload your photos at our wedding to our photo album! Click on the button below.</p>
             <ul className="actions">
-              <li><a href="" className="button">Photo Album</a></li>
+              <li><a href="https://photos.app.goo.gl/BwGHFM43JD5PqDZs2" target="_blank" className="button">Photo Album</a></li>
             </ul>
           </div>
           <Slider {...settings}>
