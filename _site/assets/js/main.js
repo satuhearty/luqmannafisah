@@ -238,7 +238,7 @@
 
 	var $countDown = $('.js-countdown-timer');
 	if ($countDown.length !== 0) {
-    $('.js-countdown-timer').countdown('2018/07/14', {elapse: true}).on('update.countdown', function(event) {
+    $('.js-countdown-timer').countdown('2018/07/14 10:00:00', {elapse: true}).on('update.countdown', function(event) {
       if (event.elapsed) {
         $(this).html(event.strftime('%D days %H:%M:%S'));
       } else {
