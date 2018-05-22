@@ -22,6 +22,7 @@ class App extends Component {
     phone: '',
     relation: '',
     attending: 0,
+    nafisDisabled: true,
     nafis: false,
     luqman: false,
     open: false,
@@ -129,6 +130,9 @@ class App extends Component {
   };
 
   updateNafis = () => {
+    if (this.state.nafisDisabled === true) {
+      this.setState({ nafisDisabled: false })
+    }
     this.setState({ nafis: !this.state.nafis });
   };
 
@@ -145,7 +149,7 @@ class App extends Component {
   };
 
   render() {
-    const { open, nafis, luqman, attending, showForm, formSubmitted, attendingArray } = this.state;
+    const { open, nafis, luqman, attending, showForm, formSubmitted, attendingArray, nafisDisabled } = this.state;
 
     return (
       <article className="post featured">
@@ -228,12 +232,6 @@ class App extends Component {
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
                     </select>
                   </div>
                 </div>
@@ -256,7 +254,7 @@ class App extends Component {
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)">
-                  <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
+                  <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} disabled={nafisDisabled} />
                   <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
