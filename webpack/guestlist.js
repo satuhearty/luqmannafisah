@@ -183,7 +183,7 @@ class App extends Component {
             }
           }}
           columns={columns}
-          defaultPageSize={50}
+          defaultPageSize={100}
           className='-striped -highlight'
         />
         <Modal open={this.state.open} onClose={this.onCloseModal} little>
