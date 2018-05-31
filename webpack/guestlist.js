@@ -48,7 +48,9 @@ class App extends Component {
           'phone': guests[key].phone,
           'nafis': guests[key].nafis,
           'luqman': guests[key].luqman,
-          'attending': guests[key].attending
+          'attending': guests[key].attending,
+          'relation': guests[key].relation,
+          'extraGuests': guests[key].extraGuests
         });
       });
       this.setState({ data: guestList });
@@ -187,12 +189,19 @@ class App extends Component {
         <Modal open={this.state.open} onClose={this.onCloseModal} little>
           <div style={{textAlign: 'center', padding: '25px 15px'}}>
             <h2>Guest Details</h2>
-            <p style={{ margin: 0 }}>Name: {currentData.name}</p>
+            <p style={{ margin: 0 }}>Name: <strong>{currentData.name}</strong></p>
             <p style={{ margin: 0 }}>Email: <a href={`mailto:${currentData.email}`}>{currentData.email}</a></p>
             <p style={{ margin: 0 }}>Phone: <a href={`tel:${currentData.phone}`}>{currentData.phone}</a></p>
+            <p style={{ margin: 0 }}>Relation: <strong>{currentData.relation}</strong></p>
             <p style={{ margin: 0 }}><span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{currentData.attending}</span> attending</p>
             <p style={{ margin: 0 }}>{this.getGuestRsvpData(currentData.nafis)} Nafis</p>
             <p style={{ margin: 0 }}>{this.getGuestRsvpData(currentData.luqman)} Luqman</p>
+            {currentData.extraGuests && Object.keys(currentData.extraGuests).map(key => {
+              const index = parseInt(key) + 1;
+              return (
+                <p style={{ margin: 0 }} key={key}>Guest {index}: <strong>{currentData.extraGuests[key]}</strong></p>
+              );
+            })}
           </div>
         </Modal>
       </div>
