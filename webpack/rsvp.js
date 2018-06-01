@@ -165,7 +165,7 @@ class App extends Component {
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
                   <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} />
-                  <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
+                  <label htmlFor="nafis">Nafis' Side - Saturday, 4 August 2018, 7.30-10.30pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)" style={{ textAlign: 'left' }}>
@@ -255,7 +255,7 @@ class App extends Component {
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)">
                   <input type="checkbox" id="nafis" name="nafis" checked={nafis} onChange={this.updateNafis} disabled={nafisDisabled} />
-                  <label htmlFor="nafis">Nafis' Side - Saturday, 14 July 2018, 8-10pm</label>
+                  <label htmlFor="nafis">Nafis' Side - Saturday, 4 August 2018, 7.30-10.30pm</label>
                 </div>
                 <div className="3u 12u$(small)" />
                 <div className="6u$ 12u$(small)">
