@@ -2,10 +2,20 @@ import React from 'react';
 
 class PostCard extends React.Component {
   componentWillMount() {
+    console.log('in component will mount');
     if (this.postAlreadyLiked()) {
       this.setState({ liked: true });
     }
     this.setState({ likeCount: this.props.post.upvote });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.post.author !== this.props.post.author) {
+      if (this.postAlreadyLiked()) {
+        this.setState({ liked: true });
+      }
+      this.setState({ likeCount: this.props.post.upvote });
+    }
   }
 
   state = {

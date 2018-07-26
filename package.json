@@ -5,7 +5,7 @@
   "main": "bundle.js",
   "scripts": {
     "start": "webpack-dev-server --devtool eval-source-map --history-api-fallback --open",
-    "build": "webpack -p"
+    "build": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "react": "^15.0.2",
     "react-addons-update": "^15.0.2",
     "react-dom": "^15.0.2",
-    "webpack": "^3.6.0",
+    "webpack": "^3.12.0",
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {

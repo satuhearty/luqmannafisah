@@ -4,6 +4,8 @@ import * as firebase from 'firebase';
 import config from './components/firebase-config';
 import Card from './components/Card';
 
+const SLIDESHOW_INTERVAL = 5000;
+
 class App extends Component {
   constructor() {
     super();
@@ -33,8 +35,21 @@ class App extends Component {
         });
       });
       this.setState({ currentQueue: currentQueue });
-      this.setState({ currentPost: currentQueue.pop() });
+      this.runQueue();
     });
+  };
+
+  runQueue = () => {
+    let index = 0;
+    this.setState({ currentPost: this.state.currentQueue[index] });
+    index++;
+    setInterval(() => {
+      if (index >= this.state.currentQueue.length) {
+        index = 0;
+      }
+      this.setState({ currentPost: this.state.currentQueue[index] });
+      index++;
+    }, SLIDESHOW_INTERVAL);
   };
 
   render() {

@@ -19,6 +19,7 @@ module.exports = {
       sourceMap: true
     })
   ],
+  watch: true,
   output: {
     path: __dirname + '/assets/js/',
     filename: '[name].js'
